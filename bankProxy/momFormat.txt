@@ -1,0 +1,24 @@
+Types:
+	* quick
+	* student
+	* mortgage
+	
+	
+listen to channel: loanRequest
+Request: 
+{
+	type: "quick" (string),
+	amount: 1000 (int),
+	creditScore: 1-100 (int)
+	uid: "2dsadasdasasdasda" (string)
+	responseChannel: "loanResponse" (string)
+}
+
+Response: 
+{
+	uid: "2dsadasdasasdasda"
+	interest: 0.005 (float)
+	initialPayment: 1000 (int)
+	bankName: "JesperBank" (string)
+}
+
