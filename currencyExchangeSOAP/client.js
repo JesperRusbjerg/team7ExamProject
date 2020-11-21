@@ -14,7 +14,7 @@ soap.createClient(url, function (err, client) {
   var args = {
     fromCurrency: "DK",
     toCurrency: "USD",
-    amount: 47
+    amount: 52
   };
   // call the service
   client.UsToDk(args, function (err, res) {
@@ -38,7 +38,7 @@ soap.createClient(url, function (err, client) {
   var args = {
     fromCurrency: "DK",
     toCurrency: "USD",
-    amount: 47
+    amount: 327
   };
   // call the service
   client.DkToUs(args, function (err, res) {
