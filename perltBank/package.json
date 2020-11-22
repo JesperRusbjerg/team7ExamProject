@@ -1,0 +1,20 @@
+{
+  "name": "perltBank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node ./build/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.5.16"
+  }
+}
