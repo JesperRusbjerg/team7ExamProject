@@ -7,7 +7,7 @@ export function start() {
     ListenForChannel("loanRequest", (request: MomRequest) => {
         let interestAndPayment = calculateInterestAndInitialPayment(request);
         let momResponse: MomResponse = {
-            bankName: "Bangster",
+            bankName: "Bankster",
             interest: interestAndPayment.interest,
             initialPayment: interestAndPayment.initialPayment,
             uid: request.uid
