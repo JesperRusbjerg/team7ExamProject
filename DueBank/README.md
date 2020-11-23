@@ -2,7 +2,7 @@
 By Michael Due
 
 ## Specs
-- Language: Python (v?)
+- Language: Python (v3.8.3 - Conda)
 - MOM: RabbitMQ
 
 ## Requirements
@@ -58,4 +58,12 @@ bankName: name of the bank ("DueBank")
 ```
 
 ## Setup
-Coming soon...
+
+### Local
+Run the lines step by step
+
+1. `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management` - prefix with `winpty` for windows
+2. `python receive_logs.py` - To start receiver
+3. `python emit_log.py` - To emit log
+
+### Server
