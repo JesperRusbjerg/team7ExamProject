@@ -60,10 +60,11 @@ bankName: name of the bank ("DueBank")
 ## Setup
 
 ### Local
-Run the lines step by step
+If RabbitMQ isn't downloaded: `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management` - prefix with `winpty` for windows
 
-1. `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management` - prefix with `winpty` for windows
-2. `python receive_logs.py` - To start receiver
-3. `python emit_log.py` - To emit log
+Run the lines step by step:
+
+1. `python receive_logs.py` - To start receiver
+2. `python emit_log.py` - To emit log
 
 ### Server
