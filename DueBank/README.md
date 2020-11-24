@@ -54,17 +54,15 @@ uid: unique identifier
 interest: yearly interest in procentage
 initialPayment: what the customer want to loan
 bankName: name of the bank ("DueBank")
-}
 ```
 
 ## Setup
 
 ### Local
-If RabbitMQ isn't downloaded: `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management` - prefix with `winpty` for windows
-
 Run the lines step by step:
 
-1. `python receive_logs.py` - To start receiver
-2. `python emit_log.py` - To emit log
+1. `python main.py` - To start DueBank
+   1. `python main.py > logs_from_rabbit.log` - To start DueBank that writes to a log file
+2. `python emit.py` - To emit a test call
 
 ### Server
