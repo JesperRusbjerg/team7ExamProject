@@ -3,6 +3,23 @@ By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
 
 [Google Docs](https://docs.google.com/document/d/1NzzidEb_CEyP0DWycolHPa2sPdBabaubv7AZZqTCvdA/edit#)
 
+## Gammel brainstorm
+
+- External api
+- login (microservice - REST)
+- Selvlavet protocol
+- Monolithic som base, spørger API om data
+- Sprog (Java/JSP, JS, Python, C#, C++, C, PHP)
+- Databaser (SQL, NoSQL, ...)
+- Cronjob (Langeprocesser, dagelige udførelser, API kald der tager hundredeår, cache)
+- Logging (API) (måske gemme i 6 timer i monolithic derefter sender videre til logging api)
+- Masser af generic API'er
+- Jesper laver SOAP
+- Hvad satan er eventstreaming?
+- Alle positive konti og negative konti skal give 0
+- Vi negler penge fra folket
+- Fraud detection   
+
 ## Emner der skal inkluderes
 
 - RPC
