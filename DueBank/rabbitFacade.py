@@ -1,8 +1,8 @@
 import pika
 
 
-def send(exchange, message):
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+def send(exchange, message, host):
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=host))
     channel = connection.channel()
     channel.exchange_declare(exchange=exchange, exchange_type='fanout')
     channel.basic_publish(exchange=exchange, routing_key='', body=message)
@@ -10,8 +10,8 @@ def send(exchange, message):
     connection.close()
 
 
-def subscribe(exchange, callback):
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+def subscribe(exchange, callback, host):
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=host))
     channel = connection.channel()
     channel.exchange_declare(exchange=exchange, exchange_type='fanout')
     result = channel.queue_declare(queue='', exclusive=True)

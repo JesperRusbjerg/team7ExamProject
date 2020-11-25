@@ -5,3 +5,4 @@ interest = {
     'mortgage': 0.0001
 }
 exchange = 'loanRequest'
+host = '104.248.139.111' #'localhost'

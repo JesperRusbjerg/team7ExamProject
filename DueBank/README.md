@@ -62,7 +62,12 @@ bankName: name of the bank ("DueBank")
 Run the lines step by step:
 
 1. `python main.py` - To start DueBank
-   1. `python main.py > logs_from_rabbit.log` - To start DueBank that writes to a log file
-2. `python emit.py` - To emit a test call
+   1. `python main.py > requests.log` - To start DueBank that writes to a log file
+
+Rest is only for testig
+
+2.  `python receive.py` - To start DueBank
+    1. `python receive.py > responses.log` - To start DueBank that writes to a log file
+3. `python emit.py` - To emit a test call
 
 ### Server

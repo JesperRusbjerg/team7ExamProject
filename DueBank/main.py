@@ -1,11 +1,11 @@
-from bankSettings import bankName, exchange, interest
-from rabbitFacade import subscribe
+from bankSettings import bankName, exchange, interest, host
+from rabbitFacade import subscribe, send
 import json
 
 
 def callback(ch, method, properties, body):
     request = json.loads(body.decode('utf-8'))
-    loanType = request['loanType']
+    loanType = request['type']
     amount = request['amount']
     creditScore = request['creditScore']
     uid = request['uid']
@@ -15,26 +15,30 @@ def callback(ch, method, properties, body):
 
 def processRequest(loanType, amount, creditScore, uid, responseChannel):
     printRequest(loanType, amount, creditScore, uid, responseChannel)
-    print(interest[loanType])
-    calculatedInterest = calculateInterest(interest[loanType], creditScore)
+    calculatedInterest = calculateInterest(interest[loanType], creditScore, amount)
     response = createResponse(uid, calculatedInterest, amount, bankName)
-    # TODO: send response with responseChannel
+    sendResponse(response, responseChannel)
 
 
-def calculateInterest(interest, creditScore):
-    # 95 / 100 = 0,95 <=> 20 / 100 = 0,2
-    calculatedInterest = creditScore / 100
-    # 0.01 / 0,95 = 0,0105 <=> 0,01 / 0,2 = 0,05
+def sendResponse(response, responseChannel):
+    message = json.dumps(response, indent=4)
+    send(responseChannel, message, host)
+
+
+def calculateInterest(interest, creditScore, amount):
+    higherAmountHigherInterest = (amount * interest * interest * interest) + 1
+    calculatedInterest = (creditScore / 100) * higherAmountHigherInterest
     newInterest = interest / calculatedInterest
     return newInterest
 
 
-def createResponse(uid, interest, initialPayment, bankName):
+def createResponse(uid, interest, amount, bankName):
+    initialPayment = amount * interest
     printResponse(uid, interest, initialPayment, bankName)
     response = {
         'uid': uid,
-        'interest': interest,
-        'initialPayment': initialPayment,
+        'interest': round(interest, 3),
+        'initialPayment': round(initialPayment, 3),
         'bankName': bankName
     }
     return response
@@ -61,7 +65,7 @@ def printResponse(uid, interest, initialPayment, bankName):
 
 def setupBank():
     print('Starting {}'.format(bankName))
-    subscribe(exchange, callback)
+    subscribe(exchange, callback, host)
 
 
 if __name__ == '__main__':
