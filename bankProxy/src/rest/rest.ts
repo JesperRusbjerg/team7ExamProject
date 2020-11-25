@@ -1,4 +1,4 @@
-import express, { response } from 'express'
+import express from 'express'
 import { MomRequest } from '../logic/momFacade';
 import MomHandler from '../logic/momHandler';
 import settings from '../settings';
