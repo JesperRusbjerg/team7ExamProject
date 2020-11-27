@@ -21,7 +21,11 @@ export default class TransportFacade {
             connection.on("data", async (data) => {
                 let appProtocol: ApplicationProtocol = JSON.parse(data.toString());
                 let response = await this.ControllerHandler.callController(appProtocol.type, appProtocol);
+                console.log(response);
                 connection.write(JSON.stringify(response));
+                connection.end();
+            })
+            connection.on("error", (err) => {
             })
         })
 

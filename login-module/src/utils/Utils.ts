@@ -6,6 +6,9 @@ export async function hashText(text: string) {
     return bcrypt.hash(text, salt);
 }
 
-export async function validateHash(text: string, hash: string) : Promise<boolean>{
+export async function validateHash(text: string, hash: string): Promise<boolean> {
     return bcrypt.compare(text, hash);
 }
+
+
+

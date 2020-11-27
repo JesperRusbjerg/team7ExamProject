@@ -2,7 +2,8 @@ import { findUser, User } from '../data/DataFacade';
 
 
 import ApplicationProtocol from "../transport/ApplicationProtocol";
-import { hashText, validateHash } from '../utils/Utils';
+import { validateHash } from '../utils/Utils';
+import {createAndSaveSessionId} from './../logic/SessionManager'
 
 interface LoginProtocol {
     username: string,
@@ -16,9 +17,10 @@ export default async function loginController(protocol: ApplicationProtocol): Pr
         throw new Error("Could not find user");
     }
     if (await validateHash(loginProtocol.password, dbUser.password)) {
+        let sessionId = createAndSaveSessionId();
         return {
             type: protocol.type,
-            body: dbUser,
+            body: sessionId,
             status: 200
         };
     } else {

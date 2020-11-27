@@ -2,6 +2,7 @@ import ApplicationProtocol from './../transport/ApplicationProtocol'
 import createUserController from './CreateUserController';
 
 import loginController from './LoginController';
+import verifySessionController from './VerifySessionController';
 
 
 export default class ControllerHandler {
@@ -15,6 +16,7 @@ export default class ControllerHandler {
     private addController(): void {
         this.controllerMap["login"] = loginController;
         this.controllerMap["createUser"] = createUserController;
+        this.controllerMap["verifySession"] = verifySessionController;
     }
 
     public async callController(controller: string, protocol: ApplicationProtocol): Promise<ApplicationProtocol> {

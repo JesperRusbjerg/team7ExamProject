@@ -7,9 +7,9 @@ function main() {
     let transportFacade = new TransportFacade();
     transportFacade.startServer();
 
-    setTimeout(() => {
-        sendMessage();
-    }, 1000);
+    // setTimeout(() => {
+    //     sendMessage();
+    // }, 1000);    
 }
 
 function sendMessage() {
