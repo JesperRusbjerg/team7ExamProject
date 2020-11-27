@@ -2,7 +2,7 @@
 By Michael Due
 
 ## Specs
-- Language: Python (v?)
+- Language: Python (v3.8.3 - Conda)
 - MOM: RabbitMQ
 
 ## Requirements
@@ -54,8 +54,18 @@ uid: unique identifier
 interest: yearly interest in procentage
 initialPayment: what the customer want to loan
 bankName: name of the bank ("DueBank")
-}
 ```
 
 ## Setup
-Coming soon...
+
+### Local
+Run the lines step by step:
+
+1. `python main.py` - To start DueBank
+   1. `python main.py > requests.log` - To start DueBank that writes to a log file
+
+Rest is only for testig
+
+2.  `python receive.py` - To start DueBank
+    1. `python receive.py > responses.log` - To start DueBank that writes to a log file
+3. `python emit.py` - To emit a test call
