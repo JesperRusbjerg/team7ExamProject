@@ -7,14 +7,9 @@ public class Client {
 
         ILogEngine logEngine = (ILogEngine) Naming.lookup(remoteEngine);
 
+        logEngine.saveLog("loginMicro", "HEHEDSADASDASD");
 
-        System.out.println(logEngine.readLogs("a"));
-
-        logEngine.saveLog("q", "b");
-        logEngine.saveLog("q", "c");
-
-        System.out.println(logEngine.readLogs("q"));
-
+        System.out.println(logEngine.mostPopularMicroService());
 
     }
 
