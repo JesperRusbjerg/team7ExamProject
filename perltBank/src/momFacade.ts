@@ -48,7 +48,7 @@ export function ListenForChannel(exchange: string, callback: (request: MomReques
 }
 
 export function sendOnChannel(exchange: string, response: MomResponse) {
-    amqp.connect('amqp://localhost', function (error, connection) {
+    amqp.connect(settings.proxyUrl, function (error, connection) {
         if (error) {
             throw error;
         }
@@ -64,11 +64,6 @@ export function sendOnChannel(exchange: string, response: MomResponse) {
             channel.publish(exchange, '', Buffer.from(JSON.stringify(response)));
             console.log(" [x] Sent %s", JSON.stringify(response));
         });
-
-        // setTimeout(function () {
-        //     connection.close();
-        //     process.exit(0);
-        // }, 500);
     });
 
 }

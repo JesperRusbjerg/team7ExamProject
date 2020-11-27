@@ -1,0 +1,21 @@
+{
+  "name": "login-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node build/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/mongodb": "^3.5.34",
+    "@types/node": "^14.14.10"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "mongodb": "^3.6.3"
+  }
+}

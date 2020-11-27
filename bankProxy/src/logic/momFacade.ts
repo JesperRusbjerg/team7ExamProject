@@ -63,11 +63,6 @@ export function sendOnChannel(exchange: string, response: MomRequest) {
             channel.publish(exchange, '', Buffer.from(JSON.stringify(response)));
             console.log(" [x] Sent %s", JSON.stringify(response));
         });
-
-        // setTimeout(function () {
-        //     connection.close();
-        //     process.exit(0);
-        // }, 500);
     });
 
 }
