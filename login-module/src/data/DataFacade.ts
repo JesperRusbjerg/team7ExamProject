@@ -2,8 +2,7 @@ import { Collection, Db, MongoClient, MongoError } from 'mongodb'
 
 export interface User {
     username: string,
-    password: string,
-    role: string
+    password: string
 }
 
 const USER_COLLECTION = "users";

@@ -4,8 +4,7 @@ import { hashText } from "../utils/Utils";
 
 interface CreateUserProtocol {
     username: string,
-    password: string,
-    role: string
+    password: string
 }
 
 export default async function createUserController(protocol: ApplicationProtocol) : Promise<ApplicationProtocol> {

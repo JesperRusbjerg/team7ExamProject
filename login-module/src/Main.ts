@@ -21,8 +21,7 @@ function sendMessage() {
         type: "login",
         body: {
             username: "perlt",
-            password: "hej1234",
-            role: "admin"
+            password: "hej1234"
         }
     }
 
