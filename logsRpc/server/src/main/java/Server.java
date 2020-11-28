@@ -7,6 +7,19 @@ public class Server {
 
     public static Registry registry;
 
+    //Keys to log on:
+    // loginSuccess
+    // loginUnSuccess
+
+    // creditScoreMicro
+    // proxyMicro
+
+    // emailMicro
+    // loginMicro
+    // currencyMicro
+    // statisticsMicro
+
+
     public static void main(String[] args) {
         try{
             System.out.println("Server has started");
