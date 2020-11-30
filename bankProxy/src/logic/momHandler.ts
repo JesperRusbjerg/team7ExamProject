@@ -8,7 +8,6 @@ interface responseObject {
     responseArray: MomResponse[],
     responseCount: number,
     timeoutUid: NodeJS.Timeout
-
 }
 
 export default class MomHandler {
@@ -21,7 +20,7 @@ export default class MomHandler {
 
     public makeLoanRequest(request: MomRequest, callback: (responseArray: MomResponse[]) => void) {
         let uid = createUid();
-
+      
         request.responseChannel = settings.LISTEN_CHANNEL;
         request.uid = uid;
 
