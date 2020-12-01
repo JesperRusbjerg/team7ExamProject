@@ -1,15 +1,12 @@
-import { Card, Divider, List, Typography } from 'antd';
+import { Card, Divider } from 'antd';
 
 const LoanTypeCard = ({ title, link, description, options }) => (
-  <Card title={title} extra={<a href={link}>Explore Loans</a>}>
+  <Card title={title} extra={<a href={link}>Explore Loans</a>} style={{ minHeight: 450 }}>
     <p>{description}</p>
     <Divider plain />
-    <List
-      bordered
-      size="small"
-      dataSource={options}
-      renderItem={item => (<List.Item>{item}</List.Item>)}
-    />
+    <ul>
+      {options.map(option => <li>{option}</li>)}
+    </ul>
   </Card>
 );
 
