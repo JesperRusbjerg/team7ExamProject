@@ -20,5 +20,22 @@ async function getAmountOUnSuccLoginsUser(){
     return 8;
 }
 
+async function getMostPopularMicroObject(){
+    //Fetch microservice data
+    //Will retrieve a string that can be parsed to object
+
+    //
+
+    return {
+        creditScore: 10,
+        proxy: 14,
+        email: 30,
+        login: 7,
+        currency: 23,
+        statistics: 10
+    }
+}
+
 module.exports.succes = getAmountOfSuccLoginsUser;
 module.exports.unSucces = getAmountOUnSuccLoginsUser;
+module.exports.microObjects = getMostPopularMicroObject;
