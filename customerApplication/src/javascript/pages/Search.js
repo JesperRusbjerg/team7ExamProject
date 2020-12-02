@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Row, Col } from 'antd';
-import { FormOutlined, SolutionOutlined, SearchOutlined, ProfileOutlined, MailOutlined } from '@ant-design/icons';
-import SearchEngine from '../components/SearchEngine.js';
-import SearchStatus from '../components/SearchStatus.js';
+import { Row, Col, Divider, Form, Input, Button, Select, Steps } from 'antd';
+import { FormOutlined, SolutionOutlined, SearchOutlined, ProfileOutlined, MailOutlined, LoadingOutlined } from '@ant-design/icons';
+import LabelWithInfo from '../components/LabelWithInfo.js';
+import facade from '../scripts/facade';
 
+const { Option } = Select;
+const { Step } = Steps;
 
 const Search = () => {
-  const init = [
+  const initSteps = [
     {
       active: true,
       step: 1,
@@ -48,17 +50,19 @@ const Search = () => {
       icon: <MailOutlined />
     },
   ];
-  const [steps, setSteps] = useState(init);
-  const current = steps.filter(step => step.active)[0].step
-  const [information, setInformation] = useState({});
+  const initInformation = {};
+  const [steps, setSteps] = useState(initSteps);
+  const [information, setInformation] = useState(initInformation);
+  const [activeStep, setActiveStep] = useState(1);
 
-  const submitInformation = data => {
-    console.log('Success:', data);
-    setInformation(data);
+  useEffect(() => {
+    updateSteps();
+  }, [activeStep]);
+
+  const updateSteps = () => {
     let temp = steps;
-    changeActiveStep(2, temp);
+    changeActiveStep(activeStep, temp);
     setSteps(temp);
-    console.log('Steps:', steps);
   };
 
   const changeActiveStep = (newActiveStep, steps) => {
@@ -68,21 +72,79 @@ const Search = () => {
         step.status = 'process';
       } else if (step.step < newActiveStep) {
         step.active = false;
-        step.status = 'finish'
+        step.status = 'finish';
+      } else {
+        step.active = false;
+        step.status = 'wait';
       }
     });
+  };
+
+  const submitInformation = data => {
+    console.log('data: ', data);
+    setInformation(data);
+    setActiveStep(2);
+    validateInformation(data);
+  };
+
+  const validateInformation = (data) => {
+    const result = facade.validateInput(data);
+    console.log('result: ', result);
+    console.log('data: ', data);
+    if (result.validation) { // missing to update
+      setActiveStep(3);
+      alert('Validation succeded', result, data);
+    } else {
+      setActiveStep(1);
+      alert('Validation failed', result, data);
+    }
   };
 
   return (
     <div className='site-layout-background' style={{ padding: 24, minHeight: 600 }}>
       <h1>Search all banks in matter of seconds and find the perfect loan for you.</h1>
+      <Divider />
       <Row wrap={false}>
         <Col span={12}>
-          <SearchEngine submit={submitInformation} />
+          <Form labelCol={{ span: 4 }} wrapperCol={{ span: 12 }} name='basic' initialValues={{ remember: true }} onFinish={submitInformation} requiredMark={false} >
+            <Form.Item label={<LabelWithInfo title='CPR' description='We do not save or share your CPR but only use it for retrieving your credit score!' />} name='cpr' rules={[{ required: true, message: 'Please input your CPR!' }]} >
+              <Input disabled={!steps[0].active} />
+            </Form.Item>
+
+            <Form.Item label={<LabelWithInfo title='Mail' description='We do not save or share your mail but only use it for sending your responses to you!' />} name='mail' rules={[{ required: true, message: 'Please input your mail!' }]} >
+              <Input disabled={!steps[0].active} />
+            </Form.Item>
+
+            <Form.Item label="Loan type" name="loanType" rules={[{ required: true, message: 'Please choose a loan type!' }]}>
+              <Select placeholder="Select your loan type" allowClear disabled={!steps[0].active}>
+                <Option value="quick">Quick</Option>
+                <Option value="mortgage">Mortgage</Option>
+                <Option value="student">Student</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label='Loan amount' name='amount' rules={[{ required: true, message: 'Please input the desired amount to loan!' }]} >
+              <Input disabled={!steps[0].active} />
+            </Form.Item>
+
+            <Form.Item label="Valuta" name="valuta" rules={[{ required: true, message: 'Please choose a valuta!' }]}>
+              <Select placeholder="Select your preferred valuta" allowClear disabled={!steps[0].active}>
+                <Option value="DKK">DKK</Option>
+                <Option value="USD">USD</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ offset: 4, span: 12 }}>
+              <Button type='primary' htmlType='submit' disabled={!steps[0].active}>
+                Submit
+              </Button>
+            </Form.Item>
+          </Form >
         </Col>
-        <Col span={7} />
-        <Col span={5}>
-          <SearchStatus steps={steps} current={current} />
+        <Col span={5} offset={7}>
+          <Steps direction='vertical' current={steps.filter(step => step.active)[0].step}>
+            {steps.map(step => <Step key={step.step} status={step.status} title={step.title} description={step.description} icon={step.active ? <LoadingOutlined /> : step.icon} />)}
+          </Steps>
         </Col>
       </Row>
     </div>
