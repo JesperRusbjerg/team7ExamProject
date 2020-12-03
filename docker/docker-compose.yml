@@ -31,3 +31,6 @@ services:
     ports:
       - 27017:27017
     restart: unless-stopped
+
+
+# emailModule hosted on https://emailmodule20201203224626.azurewebsites.net/

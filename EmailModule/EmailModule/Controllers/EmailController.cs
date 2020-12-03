@@ -12,7 +12,7 @@ namespace EmailModule.Controllers
         // GET api/values
         public string Get()
         {
-            return "YES";
+            return "Hallo there";
         }
 
         // POST api/values
