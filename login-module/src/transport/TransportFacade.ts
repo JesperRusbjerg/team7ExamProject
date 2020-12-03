@@ -4,7 +4,7 @@ import ApplicationProtocol from './ApplicationProtocol'
 import ControllerHandler from './../controller/ControllerHandler'
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 export default class TransportFacade {
 

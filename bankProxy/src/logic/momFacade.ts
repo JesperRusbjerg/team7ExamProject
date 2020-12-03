@@ -1,4 +1,5 @@
 import amqp from 'amqplib/callback_api'
+import settings from '../settings';
 
 
 export interface MomRequest {
@@ -19,7 +20,7 @@ export interface MomResponse {
 
 export function ListenForChannel(exchange: string, callback: (request: MomResponse) => void): void {
 
-    amqp.connect("amqp://localhost", (error, connection) => {
+    amqp.connect("amqp://" + settings.RABBIT_URL, (error, connection) => {
         if (error) {
             throw (error);
         }
@@ -47,7 +48,7 @@ export function ListenForChannel(exchange: string, callback: (request: MomRespon
 }
 
 export function sendOnChannel(exchange: string, response: MomRequest) {
-    amqp.connect('amqp://localhost', function (error, connection) {
+    amqp.connect('amqp://' + settings.RABBIT_URL, function (error, connection) {
         if (error) {
             throw error;
         }

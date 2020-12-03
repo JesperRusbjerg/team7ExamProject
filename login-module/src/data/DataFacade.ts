@@ -7,12 +7,16 @@ export interface User {
 
 const USER_COLLECTION = "users";
 
-const URL: string = "mongodb://localhost:3006";
+// const URL: string = "mongodb://localhost:3006";
+const URL: string = process.env.DB_URL || "mongodb://localhost:3006";
+
+
 
 const DB_NAME: string = 'login-module';
 
 async function getCollection(collectionName: string): Promise<Collection> {
     return new Promise((resolve, reject) => {
+        console.log(URL);
         MongoClient.connect(URL, (error, client) => {
             let db = client.db(DB_NAME);
             let collection = db.collection(collectionName);

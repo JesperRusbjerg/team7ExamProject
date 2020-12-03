@@ -1,5 +1,5 @@
-export default{
+export default {
     // proxyUrl: "amqp://localhost"
-    proxyUrl: "amqp://104.248.139.111"
+    proxyUrl: process.env["PROXY_URL"] ? "amqp://" + process.env["PROXY_URL"] : "amqp://localhost" 
 }
 

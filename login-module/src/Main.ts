@@ -8,12 +8,12 @@ function main() {
     transportFacade.startServer();
 
     // setTimeout(() => {
-    //     sendMessage();
+    // sendMessage();
     // }, 1000);    
 }
 
 function sendMessage() {
-    var client = net.connect({ port: 3000 }, function () {
+    var client = net.connect({ port: 3001 }, function () {
         console.log('connected to server!');
     });
 
