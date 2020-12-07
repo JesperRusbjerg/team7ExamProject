@@ -106,7 +106,7 @@ POST
 - Language: React
 - Integration: HTTPS
 - Additional: Ant Design
-- [Not Deployed]()
+- [Deployed](http://mdp-creations.surge.sh/)
 
 ### [AdminstratorApplication]()
 
