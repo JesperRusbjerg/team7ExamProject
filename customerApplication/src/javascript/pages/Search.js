@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, Divider, Form, Input, Button, Select, Steps } from 'antd';
+import { Row, Col, Form, Input, Button, Select, Steps } from 'antd';
 import { FormOutlined, SolutionOutlined, SearchOutlined, ProfileOutlined, MailOutlined, LoadingOutlined } from '@ant-design/icons';
 import LabelWithInfo from '../components/LabelWithInfo.js';
+import PageHeader from '../components/PageHeader.js';
+import AlertBanner from '../components/AlertBanner.js';
 import facade from '../scripts/facade';
 
 const { Option } = Select;
@@ -54,16 +56,13 @@ const Search = () => {
   const [steps, setSteps] = useState(initSteps);
   const [information, setInformation] = useState(initInformation);
   const [activeStep, setActiveStep] = useState(1);
+  const [validationResult, setValidationResult] = useState();
 
   useEffect(() => {
-    updateSteps();
-  }, [activeStep]);
-
-  const updateSteps = () => {
-    let temp = steps;
+    let temp = [...steps];
     changeActiveStep(activeStep, temp);
     setSteps(temp);
-  };
+  }, [activeStep, setActiveStep]);
 
   const changeActiveStep = (newActiveStep, steps) => {
     steps.forEach(step => {
@@ -80,8 +79,7 @@ const Search = () => {
     });
   };
 
-  const submitInformation = data => {
-    console.log('data: ', data);
+  const submitInformation = (data) => {
     setInformation(data);
     setActiveStep(2);
     validateInformation(data);
@@ -89,21 +87,26 @@ const Search = () => {
 
   const validateInformation = (data) => {
     const result = facade.validateInput(data);
-    console.log('result: ', result);
-    console.log('data: ', data);
-    if (result.validation) { // missing to update
-      setActiveStep(3);
-      alert('Validation succeded', result, data);
-    } else {
-      setActiveStep(1);
-      alert('Validation failed', result, data);
-    }
+    setTimeout(() => {
+      if (result.validation) {
+        setActiveStep(3);
+        // TODO: Search for loans
+      } else {
+        setActiveStep(1);
+        setValidationResult(result);
+      }
+    }, 2000);
+  };
+
+  const resetValidationResult = () => {
+    setValidationResult(undefined);
   };
 
   return (
-    <div className='site-layout-background' style={{ padding: 24, minHeight: 600 }}>
-      <h1>Search all banks in matter of seconds and find the perfect loan for you.</h1>
-      <Divider />
+    <div className='site-layout' style={{ padding: 24, minHeight: 600 }}>
+      <PageHeader title="Search all banks in matter of seconds and find the perfect loan for you." />
+      <AlertBanner validationResult={validationResult} resetValidationResult={resetValidationResult} />
+      <br />
       <Row wrap={false}>
         <Col span={12}>
           <Form labelCol={{ span: 4 }} wrapperCol={{ span: 12 }} name='basic' initialValues={{ remember: true }} onFinish={submitInformation} requiredMark={false} >
