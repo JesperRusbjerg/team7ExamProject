@@ -103,14 +103,14 @@ POST
 
 ### [CustomerApplication](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/customerApplication)
 
-- Language: React
+- Language: React.js
 - Integration: HTTPS
 - Additional: Ant Design
 - [Deployed](http://mdp-creations.surge.sh/)
 
 ### [AdminstratorApplication]()
 
-- Language: Vue
+- Language: Vue.js
 - Integration: HTTPS
 - Additional: None
 - [Not Deployed]()
