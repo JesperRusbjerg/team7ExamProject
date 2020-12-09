@@ -1,0 +1,30 @@
+package com.team7.esb.controller;
+
+
+import com.team7.esb.dto.BankProxyRequestDTO;
+import com.team7.esb.dto.BankProxyResponseDTO;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+public class BankProxyController {
+
+    private static final String IP = "http://localhost";
+    private static final int PORT = 3000;
+
+    @PostMapping("/request-loan")
+    public List<BankProxyResponseDTO> requestLoan(@RequestBody BankProxyRequestDTO loanRequest) {
+        RestTemplate rest = new RestTemplateBuilder().build();
+        String url = BankProxyController.IP + ":" + BankProxyController.PORT;
+        BankProxyResponseDTO[] response = rest.postForObject(url, loanRequest, BankProxyResponseDTO[].class);
+        return Arrays.asList(response);
+    }
+
+
+}
