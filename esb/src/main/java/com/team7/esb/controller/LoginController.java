@@ -1,6 +1,7 @@
 package com.team7.esb.controller;
 
 import com.team7.esb.dto.UserDTO;
+import com.team7.esb.utils.UtilsFunctions;
 import loginModule.LoginModule;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class LoginController {
 
-    private static final String IP = "localhost";
-    private static final int PORT = 3001;
+    private static final String IP = UtilsFunctions.getStringEnvOrDefault("LOGIN-IP", "localhost");
+    private static final int PORT = UtilsFunctions.getIntEnvOrDefault("LOGIN-PORT", 3001);
 
     @PostMapping("/login")
     public String login(@RequestBody UserDTO login) {

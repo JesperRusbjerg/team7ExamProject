@@ -3,6 +3,7 @@ package com.team7.esb.controller;
 
 import com.team7.esb.dto.BankProxyRequestDTO;
 import com.team7.esb.dto.BankProxyResponseDTO;
+import com.team7.esb.utils.UtilsFunctions;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +16,8 @@ import java.util.List;
 @RestController
 public class BankProxyController {
 
-    private static final String IP = "http://localhost";
-    private static final int PORT = 3000;
+    private static final String IP = UtilsFunctions.getStringEnvOrDefault("BANK-PROXY-IP", "http://localhost");
+    private static final int PORT = UtilsFunctions.getIntEnvOrDefault("BANK-PROXY-PORT", 3000);
 
     @PostMapping("/request-loan")
     public List<BankProxyResponseDTO> requestLoan(@RequestBody BankProxyRequestDTO loanRequest) {
