@@ -1,11 +1,31 @@
 @import '~antd/dist/antd.css';
-
-#components-layout-demo-fixed-sider {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
+body {
+  background: rgb(65, 162, 255);
 }
 
-.site-layout .site-layout-background {
-  background: rgb(214, 214, 214);
+h1 {
+  font-weight: 600;
+}
+
+.site-layout-background {
+  background: rgb(191, 220, 247);
+  height: 100%;
+}
+
+.site-layout {
+  background: rgb(255, 255, 255);
+}
+
+.card-layout-background {
+  background: rgba(255, 255, 255, 0.0);
+}
+
+.card-layout {
+  background: rgb(204, 228, 253);
+  background: linear-gradient(180deg, rgba(204, 228, 253, 1) 0%, rgb(150, 180, 235) 100%, rgb(85, 129, 218) 100%);
+  border: 1px solid black;
+}
+
+.loan-card {
+  min-height: 450px;
 }

@@ -59,28 +59,28 @@ POST
 - [Deployed](https://www.mdp-creations.dk/creditScoreModule/)
 
 
-### [StatisticsModule]()
+### [StatisticsModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/statisticsRest)
 
 - Language: Java
 - Integration: RPC
 - Additional: None
 - [Not Deployed]()
 
-### [MailModule]()
+### [MailModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/EmailModule)
 
 - Language: ?
 - Integration: ?
 - Additional: None
 - [Not Deployed]()
 
-### [LoggingModule]()
+### [LoggingModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/logsRpc)
 
 - Language: Java
 - Integration: RPC
 - Additional: None
 - [Not Deployed]()
 
-### [LoginModule]()
+### [LoginModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/login-module)
 
 - Language: C#
 - Integration: TCP
@@ -101,16 +101,16 @@ POST
 - Additional: None
 - [Not Deployed]()
 
-### [CustomerApplication]()
+### [CustomerApplication](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/customerApplication)
 
-- Language: React
+- Language: React.js
 - Integration: HTTPS
 - Additional: Ant Design
-- [Not Deployed]()
+- [Deployed](http://mdp-creations.surge.sh/)
 
 ### [AdminstratorApplication]()
 
-- Language: Vue
+- Language: Vue.js
 - Integration: HTTPS
 - Additional: None
 - [Not Deployed]()
