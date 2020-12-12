@@ -1,3 +1,7 @@
+package com.team7.esb.controller;
+
+import com.team7.esb.rpcInterfaces.ILogEngine;
+
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -23,6 +27,7 @@ public class Server {
     public static void main(String[] args) {
         try{
             System.out.println("Server has started");
+
             registry = LocateRegistry.createRegistry(1099);
 
             String logRMIPoint = "LogServices";
