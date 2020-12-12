@@ -20,6 +20,4 @@ public class EmailController {
         EmailResponseDTO response = rest.postForObject(EmailController.URL, emailRequest, EmailResponseDTO.class);
         return response;
     }
-
-
 }

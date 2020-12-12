@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LoginController {
-
     private static final String IP = UtilsFunctions.getStringEnvOrDefault("LOGIN-IP", "localhost");
     private static final int PORT = UtilsFunctions.getIntEnvOrDefault("LOGIN-PORT", 3001);
 

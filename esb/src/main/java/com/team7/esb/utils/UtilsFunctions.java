@@ -1,8 +1,6 @@
 package com.team7.esb.utils;
 
 public class UtilsFunctions {
-
-
     public static String getStringEnvOrDefault(String env, String defaultValue){
         String envValue =  System.getenv(env);
         String value =  envValue != null ? envValue : defaultValue;
