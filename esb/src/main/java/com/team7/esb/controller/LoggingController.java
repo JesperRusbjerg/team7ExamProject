@@ -3,6 +3,7 @@ package com.team7.esb.controller;
 import com.team7.esb.dto.LogRequestDTO;
 import com.team7.esb.entity.LoginLogStats;
 import com.team7.esb.rpcInterfaces.ILogEngine;
+import com.team7.esb.utils.UtilsFunctions;
 import org.json.JSONException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ import java.util.List;
 @RestController
 public class LoggingController {
 
-    String remoteEngine = "rmi://localhost/LogServices";
+    String remoteEngine = UtilsFunctions.getStringEnvOrDefault("LOGGING_IP", "rmi://localhost/LogServices");
     ILogEngine logEngine;
 
     {
