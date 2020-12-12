@@ -16,13 +16,12 @@ import java.util.List;
 @RestController
 public class BankProxyController {
 
-    private static final String IP = UtilsFunctions.getStringEnvOrDefault("BANK-PROXY-IP", "http://localhost");
-    private static final int PORT = UtilsFunctions.getIntEnvOrDefault("BANK-PROXY-PORT", 3000);
+    private static final String IP = UtilsFunctions.getStringEnvOrDefault("BANK-PROXY-IP", "http://localhost:3000");
 
     @PostMapping("/request-loan")
     public List<BankProxyResponseDTO> requestLoan(@RequestBody BankProxyRequestDTO loanRequest) {
         RestTemplate rest = new RestTemplateBuilder().build();
-        String url = BankProxyController.IP + ":" + BankProxyController.PORT;
+        String url = BankProxyController.IP;
         BankProxyResponseDTO[] response = rest.postForObject(url, loanRequest, BankProxyResponseDTO[].class);
         return Arrays.asList(response);
     }

@@ -12,12 +12,12 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class EmailController {
 
-    private static final String URL = UtilsFunctions.getStringEnvOrDefault("EMAIL-IP", "https://emailmodule20201203224626.azurewebsites.net/api/email");
+    private static final String IP = UtilsFunctions.getStringEnvOrDefault("EMAIL-IP", "https://emailmodule20201203224626.azurewebsites.net/api/email");
 
     @PostMapping("send-email")
     public EmailResponseDTO sendEmail(@RequestBody EmailRequestDTO emailRequest) {
         RestTemplate rest = new RestTemplateBuilder().build();
-        EmailResponseDTO response = rest.postForObject(EmailController.URL, emailRequest, EmailResponseDTO.class);
+        EmailResponseDTO response = rest.postForObject(EmailController.IP, emailRequest, EmailResponseDTO.class);
         return response;
     }
 }

@@ -9,25 +9,32 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class LoginController {
 
-    private static final String IP = UtilsFunctions.getStringEnvOrDefault("LOGIN-IP", "localhost");
-    private static final int PORT = UtilsFunctions.getIntEnvOrDefault("LOGIN-PORT", 3001);
+    private static final String IP = UtilsFunctions.getStringEnvOrDefault("LOGIN-IP", "localhost:3001");
+
+    private int port;
+    private String ip;
+
+    public LoginController() {
+        this.ip = LoginController.IP.split(":")[0];
+        this.port = Integer.parseInt(LoginController.IP.split(":")[1]);
+    }
 
     @PostMapping("/login")
     public String login(@RequestBody UserDTO login) {
-        LoginModule lm = new LoginModule(LoginController.IP, LoginController.PORT);
+        LoginModule lm = new LoginModule(this.ip, this.port);
         String sessionId = lm.login(login.username, login.password);
         return sessionId;
     }
 
     @PostMapping("/create-user")
     public boolean createUser(@RequestBody UserDTO user) {
-        LoginModule lm = new LoginModule(LoginController.IP, LoginController.PORT);
+        LoginModule lm = new LoginModule(this.ip, this.port);
         return lm.createUser(user.username, user.password);
     }
 
     @GetMapping("/verify")
     public boolean verifySessionId(@RequestParam String session) {
-        LoginModule lm = new LoginModule(LoginController.IP, LoginController.PORT);
+        LoginModule lm = new LoginModule(this.ip, this.port);
         return lm.verifySessionId(session);
     }
 }

@@ -17,7 +17,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+//@RestController
 public class LoggingController {
 
     String remoteEngine = UtilsFunctions.getStringEnvOrDefault("LOGGING_IP", "rmi://localhost/LogServices");

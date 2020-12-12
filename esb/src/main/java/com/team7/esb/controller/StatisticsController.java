@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 
-@RestController
+//@RestController
 public class StatisticsController {
 
     private final String IP = UtilsFunctions.getStringEnvOrDefault("STAT_IP", "http://localhost:1234");
