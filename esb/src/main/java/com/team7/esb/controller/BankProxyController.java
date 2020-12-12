@@ -22,6 +22,7 @@ public class BankProxyController {
     public List<BankProxyResponseDTO> requestLoan(@RequestBody BankProxyRequestDTO loanRequest) {
         RestTemplate rest = new RestTemplateBuilder().build();
         String url = BankProxyController.IP;
+        System.out.println(url);
         BankProxyResponseDTO[] response = rest.postForObject(url, loanRequest, BankProxyResponseDTO[].class);
         return Arrays.asList(response);
     }

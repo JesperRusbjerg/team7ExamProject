@@ -7,7 +7,6 @@ export interface User {
 
 const USER_COLLECTION = "users";
 
-// const URL: string = "mongodb://localhost:3006";
 const URL: string = process.env.DB_URL || "mongodb://localhost:3006";
 
 

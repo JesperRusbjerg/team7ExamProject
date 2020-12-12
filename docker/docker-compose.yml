@@ -3,33 +3,28 @@ services:
   
   perlt-bank:
     image: "perlt/perlt-bank"
-    depends_on:
-      - "rabbitmq"
     restart: unless-stopped
 
   bank-proxy:
     image: "perlt/bank-proxy"
-    ports:
-      - 3000:3000
     restart: unless-stopped
   
   login-module:
     image: "perlt/login-module"
+    restart: unless-stopped
+
+  esb:
+    image: "perlt/esb"
     ports:
-      - 3001:3000
+      - 8080:8080
     restart: unless-stopped
 
   rabbitmq:
     image: "rabbitmq:3-management"
-    ports:
-      - 15672:15672
-      - 5672:5672
     restart: unless-stopped
   
   mongo:
     image: "mongo"
-    ports:
-      - 27017:27017
     restart: unless-stopped
 
 

@@ -36,6 +36,14 @@
             <version>20090211</version>
         </dependency>
 
+        <dependency>
+            <groupId>loginModule</groupId>
+            <artifactId>LoginModuleClient</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/LoginModuleClient.jar</systemPath>
+        </dependency>
+
 
     </dependencies>
 
@@ -44,6 +52,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
         </plugins>
     </build>
