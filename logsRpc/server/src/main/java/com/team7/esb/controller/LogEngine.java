@@ -1,3 +1,6 @@
+package com.team7.esb.controller;
+
+import com.team7.esb.rpcInterfaces.ILogEngine;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -5,8 +8,6 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 public class LogEngine extends UnicastRemoteObject implements ILogEngine {
@@ -18,19 +19,11 @@ public class LogEngine extends UnicastRemoteObject implements ILogEngine {
     List<String> validKeys = new ArrayList<>(Arrays.asList("loginSuccess", "loginUnSuccess", "creditScoreMicro", "proxyMicro"
             , "emailMicro", "loginMicro", "currencyMicro", "statisticsMicro"));
 
+    List<String> lastTen = new ArrayList<>(Arrays.asList("firstLog"));
+
+
     protected LogEngine() throws IOException, ClassNotFoundException {
     }
-
-    // loginSuccess
-    // loginUnSuccess
-
-    // creditScoreMicro
-    // proxyMicro
-
-    // emailMicro
-    // loginMicro
-    // currencyMicro
-    // statisticsMicro
 
 
     @Override
@@ -47,6 +40,9 @@ public class LogEngine extends UnicastRemoteObject implements ILogEngine {
         } else {
             logs.get(key).add(value);
         }
+
+        lastTen.add(value);
+
         sr.saveFile(logs);
     }
 
@@ -68,16 +64,10 @@ public class LogEngine extends UnicastRemoteObject implements ILogEngine {
         return logs.get("loginUnSuccess").size();
     }
 
-    // creditScoreMicro
-    // proxyMicro
-    // emailMicro
-    // loginMicro
-    // currencyMicro
-    // statisticsMicro
     @Override
     public String mostPopularMicroService() throws JSONException {
 
-        System.out.println(logs);
+//        System.out.println(logs);
 
         JSONObject json = new JSONObject();
         json.put("creditScore", logs.get("creditScoreMicro").size());
@@ -88,6 +78,18 @@ public class LogEngine extends UnicastRemoteObject implements ILogEngine {
         json.put("statistics", logs.get("statisticsMicro").size());
 
         return json.toString();
+    }
+
+    @Override
+    public List<String> lastTen() throws RemoteException {
+        if(lastTen.size() <= 10){
+            return lastTen;
+        }
+
+        System.out.println(lastTen);
+
+        List<String> strs = new ArrayList<String>(lastTen.subList(lastTen.size()-10, lastTen.size()));
+        return strs;
     }
 
     public static void main(String[] args) {

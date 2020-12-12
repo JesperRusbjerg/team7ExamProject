@@ -1,3 +1,5 @@
+package com.team7.esb.controller;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +8,7 @@ import java.util.List;
 
 public class SaveRead implements Serializable
 {
-    private static final String PATH = "./logs.txt";
+    private static final String PATH = "logs.txt";
 
     public void saveFile(HashMap<String, List<String>> logs)
             throws ClassNotFoundException, IOException

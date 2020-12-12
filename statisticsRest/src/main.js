@@ -7,13 +7,15 @@ const port = 1234
 
 app.get('/userStats', async (req, res) => {
 
-  console.log("hejsa")
 
-    let succesFull = await stats.succes();
-    let unsuccessFull = await stats.unSucces();
+    let logins = await stats.loginData();
+
+    let max = logins.successfullLogins > logins.unsuccessfullLogins ? logins.successfullLogins : logins.unsuccessfullLogins
+
+    let lowest = logins.successfullLogins > logins.unsuccessfullLogins ?  logins.unsuccessfullLogins : logins.successfullLogins
 
     response = {
-        howManyLoginAttempsFail: unsuccessFull/succesFull+"%"
+        howManyLoginAttempsFail: Math.round(((lowest/max) * 100) * 10) / 10
     }
 
     res.setHeader('Content-Type', 'application/json');

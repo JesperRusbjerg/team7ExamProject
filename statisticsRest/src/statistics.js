@@ -8,34 +8,23 @@ console.log(res)
 
 
 async function getAmountOfSuccLoginsUser(){
-    //Fetch amount of user succesfull login attempts from bus -> log module - number
+    
+    const response = await fetch('http://localhost:8080/get-login-logs');
+    const data = await response.json();
 
-    return 800
+    return data
 
-}
-
-async function getAmountOUnSuccLoginsUser(){
-    //Fetch amount of user unsuccesfull login attempts from bus -> log module - number
-
-    return 8;
 }
 
 async function getMostPopularMicroObject(){
-    //Fetch microservice data
-    //Will retrieve a string that can be parsed to object
 
-    //
+    const response = await fetch('http://localhost:8080/microservice-logs');
+    const data = await response.json();
 
-    return {
-        creditScore: 10,
-        proxy: 14,
-        email: 30,
-        login: 7,
-        currency: 23,
-        statistics: 10
-    }
+    return data
+
+    
 }
 
-module.exports.succes = getAmountOfSuccLoginsUser;
-module.exports.unSucces = getAmountOUnSuccLoginsUser;
+module.exports.loginData = getAmountOfSuccLoginsUser;
 module.exports.microObjects = getMostPopularMicroObject;
