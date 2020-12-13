@@ -1,8 +1,11 @@
 package com.team7.esb.controller;
 
 import com.team7.esb.dto.UserDTO;
+import com.team7.esb.exceptions.UnauthorizedUser;
 import com.team7.esb.utils.UtilsFunctions;
 import loginModule.LoginModule;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -20,16 +23,30 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserDTO login) {
+    public ResponseEntity<String> login(@RequestBody UserDTO login) {
         LoginModule lm = new LoginModule(this.ip, this.port);
         String sessionId = lm.login(login.username, login.password);
-        return sessionId;
+        if (sessionId == null) {
+            return new ResponseEntity<>("Wrong username or password", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(sessionId, HttpStatus.OK);
     }
 
     @PostMapping("/create-user")
-    public boolean createUser(@RequestBody UserDTO user) {
+    public ResponseEntity<String> createUser(@RequestBody UserDTO user, @RequestHeader("session-id") String sessionId) {
+        try {
+            UtilsFunctions.checkIfUserHasAccess(sessionId);
+        } catch (UnauthorizedUser unauthorizedUser) {
+            return new ResponseEntity<>("Could not create user", HttpStatus.BAD_REQUEST);
+        }
+
         LoginModule lm = new LoginModule(this.ip, this.port);
-        return lm.createUser(user.username, user.password);
+        boolean isUserCreated = lm.createUser(user.username, user.password);
+
+        if (!isUserCreated) {
+            return new ResponseEntity<>("Could not create user", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("User created", HttpStatus.OK);
     }
 
     @GetMapping("/verify")

@@ -2,13 +2,13 @@ package com.team7.esb.controller;
 
 import com.team7.esb.dto.LogRequestDTO;
 import com.team7.esb.entity.LoginLogStats;
+import com.team7.esb.exceptions.UnauthorizedUser;
 import com.team7.esb.rpcInterfaces.ILogEngine;
 import com.team7.esb.utils.UtilsFunctions;
 import org.json.JSONException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -17,7 +17,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-//@RestController
+@RestController
 public class LoggingController {
 
     String remoteEngine = UtilsFunctions.getStringEnvOrDefault("LOGGING_IP", "rmi://localhost/LogServices");
@@ -34,7 +34,6 @@ public class LoggingController {
 
     @PostMapping("/post-log")
     public void postLog(@RequestBody LogRequestDTO log) {
-
         try {
             logEngine.saveLog(log.key, log.log);
         } catch (Exception e) {
@@ -43,7 +42,12 @@ public class LoggingController {
     }
 
     @GetMapping("/get-login-logs")
-    public LoginLogStats getLoginStats() {
+    public ResponseEntity<LoginLogStats> getLoginStats(@RequestHeader("session-id") String sessionId) {
+        try {
+            UtilsFunctions.checkIfUserHasAccess(sessionId);
+        } catch (UnauthorizedUser unauthorizedUser) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
 
         LoginLogStats ln = new LoginLogStats();
 
@@ -53,32 +57,41 @@ public class LoggingController {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-
-        return ln;
+        return new ResponseEntity<>(ln, HttpStatus.OK);
 
     }
 
     @GetMapping("/ten-last-logs")
-    public List<String> lastTenLogs() {
-
+    public ResponseEntity<List<String>> lastTenLogs(@RequestHeader("session-id") String sessionId) {
+        try {
+            UtilsFunctions.checkIfUserHasAccess(sessionId);
+        } catch (UnauthorizedUser unauthorizedUser) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+        }
         List<String> res = new ArrayList<>();
         try {
             res = logEngine.lastTen();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        return res;
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/microservice-logs")
-    public String microServiceLogs() {
+    public ResponseEntity<String> microServiceLogs(@RequestHeader("session-id") String sessionId) {
+        try {
+            UtilsFunctions.checkIfUserHasAccess(sessionId);
+        } catch (UnauthorizedUser unauthorizedUser) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
         String res = null;
         try {
-             res = logEngine.mostPopularMicroService();
+            res = logEngine.mostPopularMicroService();
         } catch (RemoteException | JSONException e) {
             e.printStackTrace();
         }
-        return res;
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
 }

@@ -1,16 +1,19 @@
 version: "3.8"
 services:
-  
   perlt-bank:
     image: "perlt/perlt-bank"
     restart: unless-stopped
 
   bank-proxy:
     image: "perlt/bank-proxy"
+    ports:
+      - 127.0.0.1:3000:3000
     restart: unless-stopped
-  
+
   login-module:
     image: "perlt/login-module"
+    ports:
+      - 127.0.0.1:3001:3000
     restart: unless-stopped
 
   esb:
@@ -22,10 +25,8 @@ services:
   rabbitmq:
     image: "rabbitmq:3-management"
     restart: unless-stopped
-  
+
   mongo:
     image: "mongo"
     restart: unless-stopped
-
-
 # emailModule hosted on https://emailmodule20201203224626.azurewebsites.net/
