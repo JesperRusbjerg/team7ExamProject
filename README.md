@@ -105,12 +105,12 @@ POST
 
 - Language: React.js
 - Integration: HTTPS
-- Additional: Ant Design
+- Additional: Ant.Designs
 - [Deployed](http://mdp-creations.surge.sh/)
 
-### [AdminstratorApplication]()
+### [AdminstratorApplication](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/adminstration-application)
 
 - Language: Vue.js
 - Integration: HTTPS
-- Additional: None
-- [Not Deployed]()
+- Additional: Vuex, Vuetify
+- [Deployed](https://team7-adminstrator.netlify.app/)
