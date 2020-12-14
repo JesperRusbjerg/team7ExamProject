@@ -1,3 +1,5 @@
+package com.team7.esb.rpcInterfaces;
+
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -17,5 +19,7 @@ public interface ILogEngine extends Remote {
     public int unSuccesfullLogins() throws RemoteException;
 
     public String mostPopularMicroService() throws JSONException, RemoteException;
+
+    public List<String> lastTen() throws RemoteException;
 
 }

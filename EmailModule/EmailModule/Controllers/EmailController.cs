@@ -9,13 +9,13 @@ namespace EmailModule.Controllers
 {
     public class EmailController : ApiController
     {
-        // GET api/values
+        // GET api/email
         public string Get()
         {
             return "Hallo there";
         }
 
-        // POST api/values
+        // POST api/email
         public HttpResponseMessage Post([FromBody] RequestDTO request)
         {
             try

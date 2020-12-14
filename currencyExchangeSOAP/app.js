@@ -34,11 +34,10 @@ var serviceObject = {
         
         let exchangedValue = args.amount / exchangeRate;
 
+        exchangedValue = Math.round((exchangedValue + Number.EPSILON) * 100) / 100
+
         callback({
-          currencyFrom: args.fromCurrency,
-          currenyFromValue: args.amount,
-          toCurrency: args.toCurrency,
-          toCurrencyValue: exchangedValue
+          result: exchangedValue
         })
 
       }
@@ -46,12 +45,10 @@ var serviceObject = {
       UsToDk: function(args, callback){
 
         let exchangedValue = args.amount * exchangeRate;
+        exchangedValue = Math.round((exchangedValue + Number.EPSILON) * 100) / 100
 
         callback({
-          currencyFrom: args.fromCurrency,
-          currenyFromValue: args.amount,
-          toCurrency: args.toCurrency,
-          toCurrencyValue: exchangedValue
+          result: exchangedValue
         })
       }
     }
