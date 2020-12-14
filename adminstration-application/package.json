@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
+    "apexcharts": "^3.22.3",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "firebase": "^8.1.2",
     "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"
@@ -49,6 +51,25 @@
       "parser": "babel-eslint"
     },
     "rules": {}
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "semi": true,
+    "requirePragma": false,
+    "insertPragma": false,
+    "useTabs": false,
+    "proseWrap": "preserve",
+    "arrowParens": "always",
+    "jsxSingleQuote": false,
+    "htmlWhitespaceSensitivity": "css",
+    "vueIndentScriptAndStyle": false,
+    "endOfLine": "lf",
+    "quoteProps": "as-needed"
   },
   "browserslist": [
     "> 1%",
