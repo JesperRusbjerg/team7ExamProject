@@ -21,7 +21,7 @@ const App = () => {
             <Menu.Item key='1' onClick={() => { setSelectedTab('1') }}><NavLink exact activeClassName="active" to="/">Home</NavLink></Menu.Item>
             <Menu.Item key='2' onClick={() => { setSelectedTab('2') }}><NavLink exact activeClassName="active" to="/search">Search</NavLink></Menu.Item>
             <Menu.Item key='3' onClick={() => { setSelectedTab('3') }}><NavLink exact activeClassName="active" to="/about">About</NavLink></Menu.Item>
-            <Menu.Item key='4' onClick={() => { setSelectedTab('1') }} style={{ float: 'right' }}><a href="https://www.google.com/" target="_blank" rel="noreferrer">Adminstration</a></Menu.Item>
+            <Menu.Item key='4' onClick={() => { setSelectedTab('1') }} style={{ float: 'right' }}><a href="https://team7-adminstrator.netlify.app/" target="_blank" rel="noreferrer">Adminstration</a></Menu.Item>
           </Menu>
         </Header>
         <Content className='site-layout-background' style={{ padding: '38.8px 50px 0px 50px', marginTop: 64 }}>
