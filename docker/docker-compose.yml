@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
 
   logserver:
-    image: "logserver"
+    image: "perlt/logserver"
     restart: unless-stopped
 
   rabbitmq:

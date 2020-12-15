@@ -43,27 +43,25 @@ public class LoggingController {
 
     @GetMapping("/get-login-logs")
     public ResponseEntity<LoginLogStats> getLoginStats(@RequestHeader("session-id") String sessionId) {
-        {
-            try {
-                logEngine = (ILogEngine) Naming.lookup(remoteEngine);
-            } catch (NotBoundException | MalformedURLException | RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-
-
         try {
             UtilsFunctions.checkIfUserHasAccess(sessionId);
         } catch (UnauthorizedUser unauthorizedUser) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
+        try {
+            logEngine = (ILogEngine) Naming.lookup(remoteEngine);
+        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+            e.printStackTrace();
+        }
+
 
         LoginLogStats ln = new LoginLogStats();
 
         try {
             ln.successfullLogins = logEngine.succesfullLogins();
             ln.unsuccessfullLogins = logEngine.unSuccesfullLogins();
-        } catch (RemoteException e) {
+        } catch (
+                RemoteException e) {
             e.printStackTrace();
         }
         return new ResponseEntity<>(ln, HttpStatus.OK);
@@ -72,19 +70,17 @@ public class LoggingController {
 
     @GetMapping("/ten-last-logs")
     public ResponseEntity<List<String>> lastTenLogs(@RequestHeader("session-id") String sessionId) {
-        {
-            try {
-                logEngine = (ILogEngine) Naming.lookup(remoteEngine);
-            } catch (NotBoundException | MalformedURLException | RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-
         try {
             UtilsFunctions.checkIfUserHasAccess(sessionId);
         } catch (UnauthorizedUser unauthorizedUser) {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
         }
+        try {
+            logEngine = (ILogEngine) Naming.lookup(remoteEngine);
+        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+            e.printStackTrace();
+        }
+
         List<String> res = new ArrayList<>();
         try {
             res = logEngine.lastTen();
@@ -96,18 +92,16 @@ public class LoggingController {
 
     @GetMapping("/microservice-logs")
     public ResponseEntity<String> microServiceLogs(@RequestHeader("session-id") String sessionId) {
-        {
-            try {
-                logEngine = (ILogEngine) Naming.lookup(remoteEngine);
-            } catch (NotBoundException | MalformedURLException | RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-
         try {
             UtilsFunctions.checkIfUserHasAccess(sessionId);
         } catch (UnauthorizedUser unauthorizedUser) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            logEngine = (ILogEngine) Naming.lookup(remoteEngine);
+        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+            e.printStackTrace();
         }
 
         String res = null;

@@ -37,6 +37,7 @@ public class Server {
             Naming.rebind("//localhost/" + logRMIPoint, remoteLogEngine);
             System.out.println("Engine " + logRMIPoint + " bound in registry");
         }catch(Exception e){
+            e.printStackTrace();
             System.out.println("Something went wrong");
         }
     }
