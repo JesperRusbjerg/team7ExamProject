@@ -92,7 +92,5 @@ public class LogEngine extends UnicastRemoteObject implements ILogEngine {
         return strs;
     }
 
-    public static void main(String[] args) {
 
-    }
 }

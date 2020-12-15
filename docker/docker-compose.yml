@@ -28,6 +28,10 @@ services:
       - 3012:3012
     restart: unless-stopped
 
+  logserver:
+    image: "logserver"
+    restart: unless-stopped
+
   rabbitmq:
     image: "rabbitmq:3-management"
     restart: unless-stopped
