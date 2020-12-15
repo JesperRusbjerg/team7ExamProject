@@ -61,14 +61,7 @@ function start() {
 
     app.get("/stats-login", async (req, res) => {
         try {
-            let response = await axios.get(BUS_IP + "/sucess-login"
-                // ,
-                // { headers: {
-                //     'session-id': 'sol'
-                // }}
-            )
-
-
+            let response = await axios.get(BUS_IP + "/sucess-login", createSessionHeader(req))
             convertBusResponseToExpressResponse(response, res);
         } catch (e) {
             convertBusResponseToExpressResponse(e.response, res);
@@ -78,13 +71,7 @@ function start() {
 
     app.get("/stats-microservice", async (req, res) => {
         try {
-            let response = await axios.get(BUS_IP + "/micro-distribution-percent"
-                // ,
-                // { headers: {
-                //     'session-id': 'sol'
-                // }}
-            )
-
+            let response = await axios.get(BUS_IP + "/micro-distribution-percent", createSessionHeader(req))
             convertBusResponseToExpressResponse(response, res);
         } catch (e) {
             convertBusResponseToExpressResponse(e.response, res);
@@ -95,13 +82,7 @@ function start() {
     app.get("/recent-logs", async (req, res) => {
 
         try {
-            let response = await axios.get(BUS_IP + "/ten-last-logs"
-                // ,
-                // { headers: {
-                //     'session-id': 'sol'
-                // }}
-            )
-
+            let response = await axios.get(BUS_IP + "/ten-last-logs", createSessionHeader(req))
             convertBusResponseToExpressResponse(response, res);
         } catch (e) {
             convertBusResponseToExpressResponse(e.response, res);
