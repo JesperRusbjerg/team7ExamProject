@@ -40,6 +40,10 @@ services:
     image: "jrusbjerg/statistics"
     restart: unless-stopped
 
+  currency-exchange:
+    image: "perlt/currency-exchange"
+    restart: unless-stopped
+    
   logserver:
     image: "perlt/logserver"
     restart: unless-stopped

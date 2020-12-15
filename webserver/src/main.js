@@ -11,15 +11,32 @@ function start() {
     app.use(express.json());
 
     app.post("/loans", async (req, res) => {
-        let request = req.body;
-        let creditScoreObject = await axios.get(BUS_IP + "/credit-score/" + request.cpr).then(e => e.data);
-        request["creditScore"] = creditScoreObject.score
+        try {
+            let request = req.body;
+            let creditScoreObject = await axios.get(BUS_IP + "/credit-score/" + request.cpr).then(e => e.data);
+            request["creditScore"] = creditScoreObject.score
 
-        // Make sure to have currency exchange if necessary
+            if (request.currency == "USD") {
+                request.amount = await axios.get(BUS_IP + "/usd-to-dkk", {
+                    params: {
+                        amount: request.amount
+                    }
+                });
+            }
 
-        let response = await axios.post(BUS_IP + "/request-loan", req.body);
-        response.data[0]["creditScore"] = creditScoreObject.score;
-        convertBusResponseToExpressResponse(response, res);
+            let response = await axios.post(BUS_IP + "/request-loan", request);
+
+            if (request.currency == "USD") {
+                for (let i = 0; i < response.data.length; i++) {
+                    let element = response.data[i]
+                    element.initialPayment = await axios.get(BUS_IP + "/dkk-to-usd?amount=" + element.initialPayment).then(e => e.data);
+                }
+            }
+
+            convertBusResponseToExpressResponse(response, res);
+        } catch (e) {
+            convertBusResponseToExpressResponse(e.response, res);
+        }
     })
 
     app.post("/create-user", async (req, res) => {
@@ -32,7 +49,7 @@ function start() {
     })
 
     app.post("/login", async (req, res) => {
-            console.log("hi")
+        console.log("hi")
 
         try {
             let response = await axios.post(BUS_IP + "/login", req.body);
@@ -45,10 +62,10 @@ function start() {
     app.get("/stats-login", async (req, res) => {
         try {
             let response = await axios.get(BUS_IP + "/sucess-login"
-            // ,
-            // { headers: {
-            //     'session-id': 'sol'
-            // }}
+                // ,
+                // { headers: {
+                //     'session-id': 'sol'
+                // }}
             )
 
 
@@ -62,10 +79,10 @@ function start() {
     app.get("/stats-microservice", async (req, res) => {
         try {
             let response = await axios.get(BUS_IP + "/micro-distribution-percent"
-            // ,
-            // { headers: {
-            //     'session-id': 'sol'
-            // }}
+                // ,
+                // { headers: {
+                //     'session-id': 'sol'
+                // }}
             )
 
             convertBusResponseToExpressResponse(response, res);
@@ -79,10 +96,10 @@ function start() {
 
         try {
             let response = await axios.get(BUS_IP + "/ten-last-logs"
-            // ,
-            // { headers: {
-            //     'session-id': 'sol'
-            // }}
+                // ,
+                // { headers: {
+                //     'session-id': 'sol'
+                // }}
             )
 
             convertBusResponseToExpressResponse(response, res);
@@ -92,7 +109,7 @@ function start() {
 
     })
 
-   
+
 
 
     app.listen(PORT, () => {

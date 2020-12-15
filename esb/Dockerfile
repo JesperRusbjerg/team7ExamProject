@@ -12,5 +12,6 @@ ENV BANK-PROXY-IP="http://bank-proxy:3000"
 ENV LOGIN-IP="login-module:3000"
 ENV LOGGING-IP="rmi://logserver/LogServices"
 ENV STAT-IP="http://statistics:1234"
+ENV CURRENCY-IP="http://currency-exchange:8000/wsdl?wsdl"
 
 ENTRYPOINT ["java","-jar","esb.jar"]
