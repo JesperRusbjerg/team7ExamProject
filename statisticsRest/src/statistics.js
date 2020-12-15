@@ -1,15 +1,18 @@
 const fetch = require('node-fetch');
 
-async function githubber(){
-let response = await fetch('https://github.com/');
-let res = await response.text();
-console.log(res)
-}
+
+
+const esbUrl = process.env.ESB_IP ? process.env.ESB_IP : "http://localhost:8080"
 
 
 async function getAmountOfSuccLoginsUser(){
     
-    const response = await fetch('http://localhost:8080/get-login-logs');
+    const response = await fetch(esbUrl+'/get-login-logs', {
+        headers: {
+            "session-id": "sol"
+        }
+    });
+
     const data = await response.json();
 
     return data
@@ -18,12 +21,14 @@ async function getAmountOfSuccLoginsUser(){
 
 async function getMostPopularMicroObject(){
 
-    const response = await fetch('http://localhost:8080/microservice-logs');
+    const response = await fetch(esbUrl+'/microservice-logs', {
+        headers: {
+            "session-id": "sol"
+        }
+    });
     const data = await response.json();
 
     return data
-
-    
 }
 
 module.exports.loginData = getAmountOfSuccLoginsUser;

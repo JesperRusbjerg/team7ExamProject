@@ -1,11 +1,11 @@
 var amqp = require('amqplib/callback_api');
 
-let host = "104.248.139.111";
+const rabbitmq = process.env.RABBIT_IP ? process.env.RABBIT_IP : "amqp://localhost"
 
 class RabbitFacade {
 
     subscribe(subject, callback) {
-        amqp.connect('amqp://'+host, function (error0, connection) {
+        amqp.connect(rabbitmq, function (error0, connection) {
             console.log(host)
             if (error0) {
                 throw error0;
@@ -42,7 +42,7 @@ class RabbitFacade {
 
 
     send(subject, body) {
-        amqp.connect('amqp://'+host, function (error0, connection) {
+        amqp.connect(rabbitmq, function (error0, connection) {
             console.log(host)
             if (error0) {
                 throw error0;

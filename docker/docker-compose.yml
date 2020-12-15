@@ -4,6 +4,10 @@ services:
     image: "perlt/perlt-bank"
     restart: unless-stopped
 
+  jesper-bank:
+    image: "jrusbjerg/jesperbank"
+    restart: unless-stopped
+
   bank-proxy:
     image: "perlt/bank-proxy"
     ports:
@@ -26,6 +30,10 @@ services:
     image: "perlt/webserver"
     ports:
       - 3012:3012
+    restart: unless-stopped
+
+  statistics:
+    image: "jrusbjerg/statistics"
     restart: unless-stopped
 
   logserver:

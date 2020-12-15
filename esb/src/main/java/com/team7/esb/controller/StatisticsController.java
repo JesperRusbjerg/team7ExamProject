@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class StatisticsController {
 
-    private final String IP = UtilsFunctions.getStringEnvOrDefault("STAT_IP", "http://localhost:1234");
+    private final String IP = UtilsFunctions.getStringEnvOrDefault("STAT-IP", "http://localhost:1234");
 
     @GetMapping("/sucess-login")
     public ResponseEntity<String> successLogin(@RequestHeader("session-id") String sessionId) {
