@@ -49,7 +49,7 @@ function start() {
             // { headers: {
             //     'session-id': 'sol'
             // }}
-            )
+            , createSessionHeader(req))
 
 
             convertBusResponseToExpressResponse(response, res);
@@ -66,7 +66,7 @@ function start() {
             // { headers: {
             //     'session-id': 'sol'
             // }}
-            )
+            , createSessionHeader(req))
 
             convertBusResponseToExpressResponse(response, res);
         } catch (e) {
@@ -83,7 +83,7 @@ function start() {
             // { headers: {
             //     'session-id': 'sol'
             // }}
-            )
+            , createSessionHeader(req))
 
             convertBusResponseToExpressResponse(response, res);
         } catch (e) {
