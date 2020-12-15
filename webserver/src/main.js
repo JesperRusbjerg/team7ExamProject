@@ -32,6 +32,8 @@ function start() {
     })
 
     app.post("/login", async (req, res) => {
+            console.log("hi")
+
         try {
             let response = await axios.post(BUS_IP + "/login", req.body);
             convertBusResponseToExpressResponse(response, res);
@@ -39,6 +41,58 @@ function start() {
             convertBusResponseToExpressResponse(e.response, res);
         }
     })
+
+    app.get("/stats-login", async (req, res) => {
+        try {
+            let response = await axios.get(BUS_IP + "/sucess-login"
+            // ,
+            // { headers: {
+            //     'session-id': 'sol'
+            // }}
+            )
+
+
+            convertBusResponseToExpressResponse(response, res);
+        } catch (e) {
+            convertBusResponseToExpressResponse(e.response, res);
+        }
+
+    })
+
+    app.get("/stats-microservice", async (req, res) => {
+        try {
+            let response = await axios.get(BUS_IP + "/micro-distribution-percent"
+            // ,
+            // { headers: {
+            //     'session-id': 'sol'
+            // }}
+            )
+
+            convertBusResponseToExpressResponse(response, res);
+        } catch (e) {
+            convertBusResponseToExpressResponse(e.response, res);
+        }
+
+    })
+
+    app.get("/recent-logs", async (req, res) => {
+
+        try {
+            let response = await axios.get(BUS_IP + "/ten-last-logs"
+            // ,
+            // { headers: {
+            //     'session-id': 'sol'
+            // }}
+            )
+
+            convertBusResponseToExpressResponse(response, res);
+        } catch (e) {
+            convertBusResponseToExpressResponse(e.response, res);
+        }
+
+    })
+
+   
 
 
     app.listen(PORT, () => {
@@ -60,3 +114,5 @@ function convertBusResponseToExpressResponse(response, res) {
 }
 
 start();
+
+
