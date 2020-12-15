@@ -15,6 +15,8 @@ function start() {
         let creditScoreObject = await axios.get(BUS_IP + "/credit-score/" + request.cpr).then(e => e.data);
         request["creditScore"] = creditScoreObject.score
 
+        // Make sure to have currency exchange if necessary
+
         let response = await axios.post(BUS_IP + "/request-loan", req.body);
         response.data[0]["creditScore"] = creditScoreObject.score;
         convertBusResponseToExpressResponse(response, res);
@@ -22,11 +24,7 @@ function start() {
 
     app.post("/create-user", async (req, res) => {
         try {
-            let response = await axios.post(BUS_IP + "/create-user", req.body, {
-                headers: {
-                    'session-id': req.header('session-id')
-                }
-            });
+            let response = await axios.post(BUS_IP + "/create-user", req.body, createSessionHeader(req));
             convertBusResponseToExpressResponse(response, res);
         } catch (e) {
             convertBusResponseToExpressResponse(e.response, res);
@@ -48,6 +46,13 @@ function start() {
     })
 }
 
+function createSessionHeader(req) {
+    return {
+        headers: {
+            'session-id': req.header('session-id')
+        }
+    }
+}
 
 function convertBusResponseToExpressResponse(response, res) {
     res.status(response.status);

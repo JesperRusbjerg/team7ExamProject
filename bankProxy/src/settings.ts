@@ -1,6 +1,6 @@
 export default {
     LISTEN_CHANNEL: "responseChannel",
-    RESPONSES_TO_WAIT_FOR: 2,
+    RESPONSES_TO_WAIT_FOR: 3,
     RESPONSE_TIMEOUT_TIME: 10000,
 
     SEND_CHANNEL: "loanRequest",

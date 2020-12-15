@@ -41,8 +41,6 @@ class BankJesper {
                 bankName: this.bankName,
 
             }
-            console.log(body.res)
-
             console.log(res)
 
             rb.send(body.responseChannel, res)

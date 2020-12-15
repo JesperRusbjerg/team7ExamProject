@@ -1,3 +1,5 @@
+import os
+
 bankName = 'DueBank'
 interest = {
     'quick': 0.01,
@@ -5,4 +7,6 @@ interest = {
     'mortgage': 0.0001
 }
 exchange = 'loanRequest'
-host = '104.248.139.111' #'localhost'
+host = os.getenv("BANK-PROXY-HOST", "localhost") 
+
+
