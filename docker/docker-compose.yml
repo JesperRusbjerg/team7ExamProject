@@ -22,6 +22,12 @@ services:
       - 8080:8080
     restart: unless-stopped
 
+  webserver:
+    image: "perlt/webserver"
+    ports:
+      - 3012:3012
+    restart: unless-stopped
+
   rabbitmq:
     image: "rabbitmq:3-management"
     restart: unless-stopped

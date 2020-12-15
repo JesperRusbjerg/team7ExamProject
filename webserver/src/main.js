@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios")
 
 
-const PORT = process.env.WEBSERVER_PORT || 3012;
+const PORT = 3012;
 
 const BUS_IP = process.env.BUS_IP || "http://localhost:8080";
 
@@ -34,10 +34,10 @@ function start() {
     })
 
     app.post("/login", async (req, res) => {
-        try{
+        try {
             let response = await axios.post(BUS_IP + "/login", req.body);
             convertBusResponseToExpressResponse(response, res);
-        }catch(e){
+        } catch (e) {
             convertBusResponseToExpressResponse(e.response, res);
         }
     })

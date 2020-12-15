@@ -2,15 +2,15 @@ FROM openjdk:14
 
 WORKDIR /esb
 
-COPY target/esb-0.0.1-SNAPSHOT.jar esb.jar
+COPY target/*.jar esb.jar
 
 EXPOSE 8080
 
+ENV CREDIT-SCORE-IP="https://www.mdp-creations.dk/creditScoreModule"
+ENV EMAIL-IP="https://emailmodule20201203224626.azurewebsites.net/api/email"
 ENV BANK-PROXY-IP="http://bank-proxy:3000"
-# ENV CREDIT-SCORE-IP=bank-proxy
-# ENV EMAIL-IP=bank-proxy
-# ENV LOGGING-IP=bank-proxy
 ENV LOGIN-IP="login-module:3000"
-# ENV STAT-IP=bank-proxy
+# ENV LOGGING-IP="rmi://localhost/LogServices"
+# ENV STAT-IP="stat-module"
 
 ENTRYPOINT ["java","-jar","esb.jar"]
