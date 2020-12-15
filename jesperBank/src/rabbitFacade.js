@@ -6,7 +6,7 @@ class RabbitFacade {
 
     subscribe(subject, callback) {
         amqp.connect(rabbitmq, function (error0, connection) {
-            console.log(host)
+            
             if (error0) {
                 throw error0;
             }
@@ -43,7 +43,6 @@ class RabbitFacade {
 
     send(subject, body) {
         amqp.connect(rabbitmq, function (error0, connection) {
-            console.log(host)
             if (error0) {
                 throw error0;
             }
