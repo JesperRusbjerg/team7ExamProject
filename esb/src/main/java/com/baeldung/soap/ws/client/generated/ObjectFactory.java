@@ -1,5 +1,5 @@
 
-package com.soap;
+package com.baeldung.soap.ws.client.generated;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

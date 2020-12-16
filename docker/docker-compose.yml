@@ -42,6 +42,8 @@ services:
 
   currency-exchange:
     image: "perlt/currency-exchange"
+    ports:
+      - 8000:8000
     restart: unless-stopped
     
   logserver:

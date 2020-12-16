@@ -1,5 +1,5 @@
 
-package com.soap;
+package com.baeldung.soap.ws.client.generated;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "ExchangeService", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://currency-exchange:8000/wsdl?wsdl")
+@WebServiceClient(name = "ExchangeService", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://104.248.139.111:8000/wsdl?wsdl")
 public class ExchangeService
     extends Service
 {
@@ -30,7 +30,7 @@ public class ExchangeService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://currency-exchange:8000/wsdl?wsdl");
+            url = new URL("http://104.248.139.111:8000/wsdl?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

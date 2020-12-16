@@ -1,5 +1,5 @@
 
-package com.soap;
+package com.baeldung.soap.ws.client.generated;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "result"
 })
-@XmlRootElement(name = "DkToUsdOutput")
-public class DkToUsdOutput {
+@XmlRootElement(name = "UsdToDkOutput")
+public class UsdToDkOutput {
 
     @XmlElement(required = true)
     protected String result;

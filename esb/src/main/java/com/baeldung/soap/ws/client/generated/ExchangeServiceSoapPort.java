@@ -1,5 +1,5 @@
 
-package com.soap;
+package com.baeldung.soap.ws.client.generated;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
