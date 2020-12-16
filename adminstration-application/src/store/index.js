@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "@/router";
 import facade from "@/scripts/facade";
 
 Vue.use(Vuex);
@@ -51,21 +52,21 @@ export default new Vuex.Store({
   },
   actions: {
     adminLogin({ commit }, { email, password }) {
-      facade.login({ username: email, password }).then((data) => {
-        commit("setAdmin", data.data);
+      facade.login({ username: email, password }).then((res) => {
+        commit("setAdmin", res.data);
         commit("setIsAuthenticated", true);
-        sessionStorage.setItem("session-id", data.data);
+        sessionStorage.setItem("session-id", res.data);
       });
     },
     adminLogout({ commit }) {
       commit("setAdmin", null);
       commit("setIsAuthenticated", false);
       sessionStorage.setItem("session-id", null);
+      router.push("/");
     },
     adminRegister({ commit }, { email, password }) {
-      facade.register({ username: email, password }).then((data) => {
-        console.log(data);
-        if (data.data === "User created") {
+      facade.register({ username: email, password }).then((res) => {
+        if (res.data === "User created") {
           commit("setIsAdminCreated", true);
         }
       })
@@ -85,40 +86,35 @@ export default new Vuex.Store({
     },
     fetchLatestLogs({ commit }) {
       facade.latestLogs()
-        .then((data) => {
-          commit("setLatestLogs", data.data)
+        .then((res) => {
+          commit("setLatestLogs", res.data)
         })
         .catch();
     },
     fetchDistributionOfLogins({ commit }) {
       facade.distributionOfLogins()
-        .then((data) => {
-          console.log(data);
-          const failed = 24;
+        .then((res) => {
+          const failed = res.data.howManyLoginAttempsFail;
           const successfully = 100 - failed;
           commit("setDistributionOfLogins", [successfully, failed]);
         });
 
     },
     fetchDistributionOfMicroservices({ commit }) {
-      // Fetching distribution of microservices
-      const distribution = {
-        creditScore: 16,
-        proxy: 14,
-        email: 30,
-        login: 7,
-        currency: 23,
-        statistics: 10,
-      };
-      const convertedDistribution = [
-        distribution.creditScore,
-        distribution.proxy,
-        distribution.email,
-        distribution.login,
-        distribution.currency,
-        distribution.statistics,
-      ];
-      commit("setDistributionOfMicroservices", convertedDistribution);
+      facade.distributionOfMicroservices()
+        .then((res) => {
+          console.log(res);
+          const distribution = [
+            res.data.creditScore,
+            res.data.proxy,
+            res.data.email,
+            res.data.login,
+            res.data.currency,
+            res.data.statistics,
+          ];
+          commit("setDistributionOfMicroservices", distribution);
+        });
+
     },
   },
   getters: {
