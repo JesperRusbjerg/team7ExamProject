@@ -1,1 +1,1 @@
-export const BASE_URL = 'TODO';
+export const MY_BASE_URL = 'http://localhost:3012';

@@ -91,14 +91,14 @@ const Search = () => {
     setTimeout(() => {
       if (result.validation) {
         setActiveStep(3);
-        setTimeout(() => {
-          const loansData = facade.searchForLoans(data);
+        setTimeout(async () => {
+          const loans = await facade.searchForLoans(data);
           setActiveStep(4);
           setTimeout(() => {
-            setLoans(loansData);
+            setLoans(loans.data);
             setActiveStep(5);
             setTimeout(() => {
-              facade.sendMail(data, loansData);
+              facade.sendMail(data, loans.data);
               setActiveStep(6);
             }, 2000);
           }, 2000);
@@ -115,6 +115,7 @@ const Search = () => {
   };
 
   const renderContent = () => {
+    console.log(loans)
     if (loans.length > 0) {
       const columns = [
         {

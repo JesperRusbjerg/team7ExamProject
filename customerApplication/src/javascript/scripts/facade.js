@@ -1,4 +1,5 @@
-import { BASE_URL } from './settings';
+import axios from 'axios';
+import { MY_BASE_URL } from './settings';
 import inputValidator from './inputValidator';
 
 function apiFacade() {
@@ -6,29 +7,20 @@ function apiFacade() {
     return inputValidator(information)
   }
 
-  const searchForLoans = (information) => {
-    // Fetch here...
-    const data = [
-      {
-        "uid": "911a1211-6940-4dcb-9a5f-54c5f9a2e430",
-        "bankName": "Bankster",
-        "initialPayment": information.amount,
-        "interest": information.amount / 10000
-      },
-      {
-        "uid": "911a1211-6940-4dcb-9a5f-54c5f9a2e430",
-        "bankName": "DueBank",
-        "initialPayment": information.amount,
-        "interest": information.amount / 1000
-      },
-      {
-        "uid": "911a1211-6940-4dcb-9a5f-54c5f9a2e430",
-        "bankName": "JezperBank",
-        "initialPayment": information.amount,
-        "interest": information.amount / 100
-      }
-    ];
-    return data;
+  const searchForLoans = async (information) => {
+    const body = {
+      "cpr": information.cpr,
+      "mail": information.mail,
+      "type": information.loanType,
+      "amount": information.amount,
+      "currency": information.valuta
+    };
+    try {
+      const res = await axios.post(MY_BASE_URL + "/loans", body);
+      return res.data;
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const sendMail = (information, loans) => {
