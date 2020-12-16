@@ -1,6 +1,6 @@
 const express = require("express");
 const axios = require("axios")
-
+var cors = require('cors');
 
 const PORT = 3012;
 
@@ -8,6 +8,7 @@ const BUS_IP = process.env.BUS_IP || "http://localhost:8080";
 
 function start() {
     const app = express();
+    app.use(cors());
     app.use(express.json());
 
     app.post("/loans", async (req, res) => {

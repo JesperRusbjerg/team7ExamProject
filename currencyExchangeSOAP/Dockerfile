@@ -6,6 +6,8 @@ COPY package* .
 
 RUN npm install
 
+EXPOSE 8000
+
 COPY *.js .
 COPY *.wsdl .
 
