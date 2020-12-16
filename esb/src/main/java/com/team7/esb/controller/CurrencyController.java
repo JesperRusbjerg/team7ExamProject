@@ -1,7 +1,7 @@
 package com.team7.esb.controller;
 
 
-import com.soap.SoapClient;
+import com.baeldung.soap.ws.client.generated.SoapClient;
 import com.team7.esb.entity.LoginLogStats;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,22 @@ public class CurrencyController {
 
     @GetMapping("/dkk-to-usd")
     public ResponseEntity<Float> dkkToUsd(@RequestParam int amount) {
-        return new ResponseEntity<>(soap.dkkToUsdExchange(amount), HttpStatus.OK);
+
+        System.out.println("hej");
+        System.out.println(amount);
+        System.out.println();
+
+        Float test = soap.dkkToUsdExchange(amount);
+
+        Float x = Float.valueOf(33);
+
+        return new ResponseEntity<>(x, HttpStatus.OK);
     }
 
-    @GetMapping("/usd-to-dkk")
-    public ResponseEntity<Float> usdToDkk(@RequestParam int amount) {
-        return new ResponseEntity<>(soap.usdToDkkExchange(amount), HttpStatus.OK);
-    }
+//    @GetMapping("/usd-to-dkk")
+//    public ResponseEntity<Float> usdToDkk(@RequestParam int amount) {
+//
+//        return new ResponseEntity<>(soap.usdToDkkExchange(amount), HttpStatus.OK);
+//    }
 
 }

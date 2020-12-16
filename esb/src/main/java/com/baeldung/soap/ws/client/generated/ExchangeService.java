@@ -31,6 +31,7 @@ public class ExchangeService
         WebServiceException e = null;
         try {
             url = new URL("http://104.248.139.111:8000/wsdl?wsdl");
+            System.out.println(url);
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
