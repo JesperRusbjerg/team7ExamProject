@@ -172,7 +172,9 @@ export default {
         if (typeof value === "number") {
           return value === parseInt(search);
         } else if (typeof value === "string") {
-          return value.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) !== -1;
+          return (
+            value.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) !== -1
+          );
         }
       }
       return false;

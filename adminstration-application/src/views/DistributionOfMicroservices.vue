@@ -29,10 +29,8 @@ import VueApexCharts from "vue-apexcharts";
 
 export default {
   name: "DistributionOfMicroservices",
-  beforeMount(to, from, next) {
-    this.$store.dispatch("fetchDistributionOfMicroservices").then(() => {
-      next();
-    });
+  beforeMount() {
+    this.$store.dispatch("fetchDistributionOfMicroservices");
   },
   components: {
     VueApexCharts,

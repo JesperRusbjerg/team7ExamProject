@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import firebase from "firebase";
-import router from "@/router";
+import facade from "@/scripts/facade";
 
 Vue.use(Vuex);
 
@@ -52,48 +51,27 @@ export default new Vuex.Store({
   },
   actions: {
     adminLogin({ commit }, { email, password }) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((admin) => {
-          commit("setAdmin", admin);
-          commit("setIsAuthenticated", true);
-        })
-        .catch(() => {
-          commit("setAdmin", null);
-          commit("setIsAuthenticated", false);
-          router.push("/error");
-        });
+      facade.login({ username: email, password }).then((data) => {
+        commit("setAdmin", data.data);
+        commit("setIsAuthenticated", true);
+        sessionStorage.setItem("session-id", data.data);
+      });
     },
     adminLogout({ commit }) {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          commit("setAdmin", null);
-          commit("setIsAuthenticated", false);
-        })
-        .catch(() => {
-          commit("setAdmin", null);
-          commit("setIsAuthenticated", false);
-          router.push("/error");
-        });
+      commit("setAdmin", null);
+      commit("setIsAuthenticated", false);
+      sessionStorage.setItem("session-id", null);
     },
     adminRegister({ commit }, { email, password }) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => {
+      facade.register({ username: email, password }).then((data) => {
+        console.log(data);
+        if (data.data === "User created") {
           commit("setIsAdminCreated", true);
-        })
-        .catch(() => {
-          router.push("/error");
-        });
+        }
+      })
     },
     adminUpdate({ commit }, { email, password }) {
-      console.log(
-        `Successfully updated user with email: ${email} with password ${password}`
-      );
+      console.log(`Successfully updated user with email: ${email} with password ${password}`);
       commit("setIsAdminUpdated", true);
     },
     adminDelete({ commit }, { email }) {
@@ -106,26 +84,21 @@ export default new Vuex.Store({
       commit("setIsAdminDeleted", false);
     },
     fetchLatestLogs({ commit }) {
-      // Fetching latest logs
-      const latestLogs = [
-        "This is a very important log message",
-        "This is just some information",
-        "Who knows what this message contains",
-        "Blah blah blah... blah?",
-        "Another message for display",
-        "Why do we keep doing this?",
-        "Did someone just try to hack us",
-        "Where does this message come from?",
-        "Now we are near the end of this test data",
-        "Shit son! We just got hacked...",
-      ];
-      commit("setLatestLogs", latestLogs);
+      facade.latestLogs()
+        .then((data) => {
+          commit("setLatestLogs", data.data)
+        })
+        .catch();
     },
     fetchDistributionOfLogins({ commit }) {
-      // Fetching failed logins
-      const failed = 24;
-      const successfully = 100 - failed;
-      commit("setDistributionOfLogins", [successfully, failed]);
+      facade.distributionOfLogins()
+        .then((data) => {
+          console.log(data);
+          const failed = 24;
+          const successfully = 100 - failed;
+          commit("setDistributionOfLogins", [successfully, failed]);
+        });
+
     },
     fetchDistributionOfMicroservices({ commit }) {
       // Fetching distribution of microservices

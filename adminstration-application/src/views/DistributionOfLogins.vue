@@ -29,10 +29,8 @@ import VueApexCharts from "vue-apexcharts";
 
 export default {
   name: "DistributionOfLogins",
-  beforeMount(to, from, next) {
-    this.$store.dispatch("fetchDistributionOfLogins").then(() => {
-      next();
-    });
+  beforeMount() {
+    this.$store.dispatch("fetchDistributionOfLogins");
   },
   components: {
     VueApexCharts,

@@ -33,28 +33,12 @@
 <script>
 export default {
   name: "LatestLogs",
-  data: () => ({
-    items: [
-      "This is a very important log message",
-      "This is just some information",
-      "Who knows what this message contains",
-      "Blah blah blah... blah?",
-      "Another message for display",
-      "Why do we keep doing this?",
-      "Did someone just try to hack us",
-      "Where does this message come from?",
-      "Now we are near the end of this test data",
-      "Shit son! We just got hacked... ",
-    ],
-  }),
-  methods: {
-    getNow() {
-      const today = new Date()
-        .toISOString()
-        .slice(0, 19)
-        .replace(/-/g, "/")
-        .replace("T", " ");
-      return today;
+  beforeMount() {
+    this.$store.dispatch("fetchLatestLogs");
+  },
+  computed: {
+    items() {
+      return this.$store.getters.getLatestLogs;
     },
   },
 };

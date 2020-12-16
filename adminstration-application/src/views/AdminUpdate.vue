@@ -41,7 +41,9 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary" :disabled="!valid" @click="submit">Update</v-btn>
+                <v-btn color="primary" :disabled="!valid" @click="submit"
+                  >Update</v-btn
+                >
               </v-card-actions>
               <v-alert
                 v-if="isAdminUpdated"
