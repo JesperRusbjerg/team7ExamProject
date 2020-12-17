@@ -1,7 +1,12 @@
 # ExamProject for System - Integration
+
 By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
 
+## Introduction
+
+
 ## Links and diagrams/models
+
 [Draft to exam project](https://datsoftlyngby.github.io/soft2020fall/resources/3ac43cba-ExamProjectDraft.pdf)
 
 [Brainstorm](https://github.com/JesperRusbjerg/team7ExamProject/blob/main/Brainstorm.md)
@@ -14,112 +19,129 @@ By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
 
 ![BPMN Model](searchForLoan.png)
 
-## Microservices
+
+## Program flow
+
+
+## Microservices / Index
 
 ### [PerltBank](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/perltBank)
 
-- Language: TypeScript
-- Integration: RabbitMQ (MOM)
-- Additional: None
-- [Not Deployed]()
+- **Language**: TypeScript
+- **Integration**: RabbitMQ (MOM)
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Description**: This module subscribes to the bank proxy, and broadcasts its answer acroding to the loan request.
 
 ### [JesperBank](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/jesperBank)
 
-- Language: Node.js
-- Integration: RabbitMQ (MOM)
-- Additional: None
-- [Not Deployed]()
+- **Language**: NodeJS
+- **Integration**: RabbitMQ (MOM)
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Description**: This module subscribes to the bank proxy, and broadcasts its answer acroding to the loan request.
 
 ### [DueBank](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/DueBank)
 
-- Language: Python
-- Integration: RabbitMQ (MOM)
-- Additional: None
-- [Not Deployed]()
+- **Language**: Python
+- **Integration**: RabbitMQ (MOM)
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Description**: This module subscribes to the bank proxy, and broadcasts its answer acroding to the loan request.
 
-### [ValutaConverterModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/currencyExchangeSOAP)
+### [CurrencyExchange](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/currencyExchangeSOAP)
 
-- Language: Node.js
-- Integration: SOAP
-- Additional: Webscraping
-- [Not Deployed]()
+- **Language**: NodeJS
+- **Integration**: SOAP
+- **Dependencies**: [Cheerio](https://www.npmjs.com/package/cheerio)
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Description**: This module intergrates with a monolithic application through webscraping, to retrive the currency exchange rate between USD and DKK.
 
-### [BankProxyModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/bankProxy)
+### [BankProxy](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/bankProxy)
 
-- Language: TypeScript
-- Integration: REST
-- Additional: None
-- [Deployed](http://104.248.139.111:3000/)
+- **Language**: TypeScript
+- **Integration**: REST
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Description**: This module brodcasts the given loan request to the banks subscribed to our system, and hereafter collect the answers to return.
 
-POST
-```json
-{
-    "amount": 10000,
-    "creditScore": 11,
-    "type": "quick"
-}
-```
+### [CreditScoreService](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/CreditScoreModule)
 
-### [CreditScoreModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/CreditScoreModule)
+- **Language**: Java
+- **Integration**: REST
+- **Architecture Type**: Webserver
+- **[Deployment](https://www.mdp-creations.dk/creditScoreModule/)**: Docker(Tomcat)
+- **Additional**: CI / CD pipeline with Travis CI. This service has documented endpoints at the base url.
+- **Description**: This service given a CPR number calculates a creditscore and returns a number between 1 and 100.
 
-- Language: Java
-- Integration: REST
-- Additional: None
-- [Deployed](https://www.mdp-creations.dk/creditScoreModule/)
+### [Statistics](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/statisticsRest)
 
+- **Language**: NodeJS
+- **Integration**: REST
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Description**: Retrives the system logs from our LoggingModule, and calculates some defined statistics.
 
-### [StatisticsModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/statisticsRest)
+### [MailService](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/EmailModule)
 
-- Language: Java
-- Integration: RPC
-- Additional: None
-- [Not Deployed]()
+- **Language**: C#
+- **Integration**: REST
+- **Architecture Type**: Webserver
+- **[Deployment](https://emailmodule20201203224626.azurewebsites.net/api/email)**: Azure / Docker
+- **Description**: This service can send out emails by a list of recervies, subject, and body.
 
-### [MailModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/EmailModule)
+### [Logging](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/logsRpc)
 
-- Language: ?
-- Integration: ?
-- Additional: None
-- [Not Deployed]()
+- **Language**: Java
+- **Integration**: RPC
+- **Dependencies**: TODO: insert here
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Description**: Can log system behavior based on predefined keywords.
 
-### [LoggingModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/logsRpc)
+### [Login](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/login-module)
 
-- Language: Java
-- Integration: RPC
-- Additional: None
-- [Not Deployed]()
+- **Language**: TypeScript
+- **Integration**: Custom application protocol
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Additional**: Has a java intergraion client
+- **Description**: This module handles all user creation, and user verifications, based on username and password.
 
-### [LoginModule](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/login-module)
+### [Webserver](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/webserver)
 
-- Language: C#
-- Integration: TCP
-- Additional: Custom protocol
-- [Not Deployed]()
-
-### [Webserver ("Momondo")](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/webserver)
-
-- Language: ?
-- Integration: ?
-- Additional: None
-- [Not Deployed]()
+- **Language**: NodeJS
+- **Integration**: REST
+- **Architecture Type**: Web server
+- **Deployment**: Docker
+- **Description**: This is the webserver the our frontend sends its requests to.
 
 ### [ESB](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/esb)
 
-- Language: ?
-- Integration: ?
-- Additional: None
-- [Not Deployed]()
+- **Language**: Java
+- **Integration**: REST
+- **Dependencies**: LoginModuleClient
+- **Architecture Type**: Microservice
+- **Deployment**: Docker
+- **Description**: This module serves as a Enterprise Service Bus(ESB) to our system.
 
 ### [CustomerApplication](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/customerApplication)
 
-- Language: React.js
-- Integration: HTTPS
-- Additional: Ant.Designs
-- [Deployed](http://mdp-creations.surge.sh/)
+- **Language**: Javascript
+- **Integration**: Browser
+- **Dependencies**: React, Ant.design
+- **Architecture Type**: Frontend
+- **[Deployment](http://mdp-creations.surge.sh/)**: Surge
+- **Additional**: The backend needs to run on your localhost
+- **Description**: This frontend connect to our webserver, and allows a customer to search for loans of different types. When a respond is found the resulsts are presented on the site and send in a mail to the customer.
 
 ### [AdminstratorApplication](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/adminstration-application)
 
-- Language: Vue.js
-- Integration: HTTPS
-- Additional: Vuex, Vuetify
-- [Deployed](https://team7-adminstrator.netlify.app/)
+- **Language**: Javascript
+- **Integration**: Browser
+- **Dependencies**: Vue, Vuetify
+- **Architecture Type**: Frontend
+- **[Deployment](https://team7-adminstrator.netlify.app/)**: Netlify
+- **Additional**: The backend needs to run on your localhost
+- **Description**: This is the administrator frontend. This allows the to get statistics on system behavior, latest logs, and user CRUD operations.
