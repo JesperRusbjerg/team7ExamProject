@@ -10,6 +10,6 @@ COPY src src
 
 EXPOSE 3012
 
-ENV BUS_IP="http://esb:8080"
+# ENV BUS_IP="http://esb:8080"
 
 ENTRYPOINT [ "npm", "start"]

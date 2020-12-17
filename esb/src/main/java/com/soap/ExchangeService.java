@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "ExchangeService", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://currency-exchange:8000/wsdl?wsdl")
+@WebServiceClient(name = "ExchangeService", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://localhost:8000/wsdl?wsdl")
 public class ExchangeService
     extends Service
 {
@@ -30,7 +30,7 @@ public class ExchangeService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://currency-exchange:8000/wsdl?wsdl");
+            url = new URL("http://localhost:8000/wsdl?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

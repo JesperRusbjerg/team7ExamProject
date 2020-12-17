@@ -19,7 +19,7 @@ public class LogEngine extends UnicastRemoteObject implements ILogEngine {
     List<String> validKeys = new ArrayList<>(Arrays.asList("loginSuccess", "loginUnSuccess", "creditScoreMicro", "proxyMicro"
             , "emailMicro", "loginMicro", "currencyMicro", "statisticsMicro"));
 
-    List<String> lastTen = new ArrayList<>(Arrays.asList("firstLog"));
+    List<String> lastTen = new ArrayList<>(Arrays.asList("proxyMicro used", "statisticsMicro used", "statisticsMicro used", "Creditscore microservice used", "loginUnsuccess for admin", "loginSuccess for admin", "loginSuccess for admin", "loginSuccess for admin", "currencyMicro used", "currencyMicro used"));
 
 
     protected LogEngine() throws IOException, ClassNotFoundException {
