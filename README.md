@@ -5,6 +5,8 @@ By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
 
 [Exam project UML diagram](https://app.lucidchart.com/lucidchart/invitations/accept/0f1c9112-dbee-416f-b531-6fe8e2ef72d5)
 
+![BPMN Model](searchForLoan.png)
+
 ## Microservices
 
 ### [Bankster](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/perltBank)
