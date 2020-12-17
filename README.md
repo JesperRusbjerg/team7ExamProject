@@ -14,7 +14,7 @@ By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
 
 ## Microservices
 
-### [Bankster](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/perltBank)
+### [PerltBank](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/perltBank)
 
 - Language: TypeScript
 - Integration: RabbitMQ (MOM)
