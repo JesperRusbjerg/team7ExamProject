@@ -1,9 +1,18 @@
+Demo 
+
+- 
+
+
+
 # ExamProject for System - Integration
 
 By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
 
 ## Introduction
 
+Our team is part of the large IT company DevOrgs. Our task has been to develop a IT solution that enables a user to send a loan request. Our service intergrates with multiple banks and retrives a response from each bank. Each bank response is presented to the user, with the option to pick the bank of the users choice.
+
+In addition to the bank application, a administrative site was also part of the project. The administrators of the application is able to see a range of logs, statistics and user oprations from a seperate admin site.
 
 ## Links and diagrams/models
 
@@ -19,8 +28,11 @@ By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
 
 ![BPMN Model](searchForLoan.png)
 
-
 ## Program flow
+ [TODO Read](https://datsoftlyngby.github.io/soft2020fall/resources/4fc67f30-SI2020ExamProject.pdf): 
+  EIP (Enterprist intergration patterens)
+  EM (Enterprise messaging)
+  ES (Event streaming)
 
 
 ## Microservices / Index
