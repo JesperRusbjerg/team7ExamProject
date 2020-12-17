@@ -1,9 +1,14 @@
 # ExamProject for System - Integration
 By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
 
+## Links and diagrams/models
 [Draft to exam project](https://datsoftlyngby.github.io/soft2020fall/resources/3ac43cba-ExamProjectDraft.pdf)
 
 [Exam project UML diagram](https://app.lucidchart.com/lucidchart/invitations/accept/0f1c9112-dbee-416f-b531-6fe8e2ef72d5)
+
+![SI-ExamProject](SI-ExamProject.png)
+
+[BPMN Model file](https://github.com/JesperRusbjerg/team7ExamProject/blob/main/searchForLoan.bpmn)
 
 ![BPMN Model](searchForLoan.png)
 
@@ -89,14 +94,14 @@ POST
 - Additional: Custom protocol
 - [Not Deployed]()
 
-### ["Momondo"]()
+### [Webserver ("Momondo")](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/webserver)
 
 - Language: ?
 - Integration: ?
 - Additional: None
 - [Not Deployed]()
 
-### [ESB]()
+### [ESB](https://github.com/JesperRusbjerg/team7ExamProject/tree/main/esb)
 
 - Language: ?
 - Integration: ?
