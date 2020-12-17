@@ -1,9 +1,3 @@
-Demo 
-
-- 
-
-
-
 # ExamProject for System - Integration
 
 By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
