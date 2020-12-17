@@ -1,6 +1,7 @@
 package com.team7.esb.controller;
 
 import com.team7.esb.dto.UserDTO;
+import com.team7.esb.entity.LogEngine;
 import com.team7.esb.exceptions.UnauthorizedUser;
 import com.team7.esb.utils.UtilsFunctions;
 import loginModule.LoginModule;
@@ -17,6 +18,8 @@ public class LoginController {
     private int port;
     private String ip;
 
+
+
     public LoginController() {
         this.ip = LoginController.IP.split(":")[0];
         this.port = Integer.parseInt(LoginController.IP.split(":")[1]);
@@ -27,16 +30,24 @@ public class LoginController {
         LoginModule lm = new LoginModule(this.ip, this.port);
         String sessionId = lm.login(login.username, login.password);
         if (sessionId == null) {
+            LogEngine le = new LogEngine();
+            le.saveLog("loginUnSuccess", "Wrong username or password");
             return new ResponseEntity<>("Wrong username or password", HttpStatus.BAD_REQUEST);
         }
+            LogEngine le = new LogEngine();
+            le.saveLog("loginSuccess", "Admin logged in");
         return new ResponseEntity<>(sessionId, HttpStatus.OK);
     }
 
     @PostMapping("/create-user")
     public ResponseEntity<String> createUser(@RequestBody UserDTO user, @RequestHeader("session-id") String sessionId) {
         try {
+            LogEngine le = new LogEngine();
+            le.saveLog("loginSuccess", "New user created");
             UtilsFunctions.checkIfUserHasAccess(sessionId);
         } catch (UnauthorizedUser unauthorizedUser) {
+            LogEngine le = new LogEngine();
+            le.saveLog("loginUnSuccess", "Could not create user");
             return new ResponseEntity<>("Could not create user", HttpStatus.BAD_REQUEST);
         }
 

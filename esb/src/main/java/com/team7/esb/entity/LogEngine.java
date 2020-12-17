@@ -12,9 +12,25 @@ public class LogEngine {
 
     public ILogEngine logEngine;
 
-    public LogEngine() throws RemoteException, NotBoundException, MalformedURLException {
+    public LogEngine()  {
         String remoteEngine = UtilsFunctions.getStringEnvOrDefault("LOGGING-IP", "rmi://localhost/LogServices");
-        logEngine = (ILogEngine) Naming.lookup(remoteEngine);
+        try {
+            logEngine = (ILogEngine) Naming.lookup(remoteEngine);
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
+
+    public void saveLog(String key, String value){
+
+        try {
+            logEngine.saveLog(key, value);
+        } catch (Exception e) {
+        }
+    };
 
 }

@@ -1,5 +1,6 @@
 package com.team7.esb.controller;
 
+import com.team7.esb.entity.LogEngine;
 import com.team7.esb.exceptions.UnauthorizedUser;
 import com.team7.esb.utils.UtilsFunctions;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -16,6 +17,8 @@ public class StatisticsController {
 
     private final String IP = UtilsFunctions.getStringEnvOrDefault("STAT-IP", "http://localhost:1234");
 
+
+
     @GetMapping("/sucess-login")
     public ResponseEntity<String> successLogin(@RequestHeader("session-id") String sessionId) {
         try {
@@ -23,6 +26,8 @@ public class StatisticsController {
         } catch (UnauthorizedUser unauthorizedUser) {
             return new ResponseEntity<>("Could not verify user", HttpStatus.BAD_REQUEST);
         }
+        LogEngine le = new LogEngine();
+        le.saveLog("statisticsMicro", "Login stats fetched");
 
         RestTemplate rest = new RestTemplateBuilder().build();
         String url = this.IP + "/userStats";
@@ -38,6 +43,8 @@ public class StatisticsController {
         } catch (UnauthorizedUser unauthorizedUser) {
             return new ResponseEntity<>("Could not verify user", HttpStatus.BAD_REQUEST);
         }
+        LogEngine le = new LogEngine();
+        le.saveLog("statisticsMicro", "Micro stats fetched");
         RestTemplate rest = new RestTemplateBuilder().build();
         String url = this.IP + "/microStats";
         String response = rest.getForObject(url, String.class);
