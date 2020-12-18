@@ -115,7 +115,6 @@ const Search = () => {
   };
 
   const renderContent = () => {
-    console.log(loans)
     if (loans.length > 0) {
       const columns = [
         {
