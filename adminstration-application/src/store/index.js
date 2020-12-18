@@ -87,7 +87,7 @@ export default new Vuex.Store({
     fetchLatestLogs({ commit }) {
       facade.latestLogs()
         .then((res) => {
-          commit("setLatestLogs", res.data)
+          commit("setLatestLogs", res.data.reverse())
         })
         .catch();
     },
