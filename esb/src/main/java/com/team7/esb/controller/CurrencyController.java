@@ -20,14 +20,20 @@ public class CurrencyController {
     public ResponseEntity<Float> dkkToUsd(@RequestParam int amount) {
         LogEngine le = new LogEngine();
         le.saveLog("currencyMicro", "dkkToUsdExchanged");
-        return new ResponseEntity<>(soap.dkkToUsdExchange(amount), HttpStatus.OK);
+
+        Float x = soap.dkkToUsdExchange(amount);
+
+        return new ResponseEntity<>(x, HttpStatus.OK);
     }
 
     @GetMapping("/usd-to-dkk")
     public ResponseEntity<Float> usdToDkk(@RequestParam int amount) {
         LogEngine le = new LogEngine();
         le.saveLog("currencyMicro", "UsdToDkkExchanged");
-        return new ResponseEntity<>(soap.usdToDkkExchange(amount), HttpStatus.OK);
+
+        Float x = soap.usdToDkkExchange(amount);
+
+        return new ResponseEntity<>(x, HttpStatus.OK);
     }
 
 }

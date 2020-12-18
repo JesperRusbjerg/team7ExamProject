@@ -22,7 +22,9 @@ function start() {
                     params: {
                         amount: request.amount
                     }
-                });
+                }).then(e => e.data);
+
+
             }
 
             let response = await axios.post(BUS_IP + "/request-loan", request);
