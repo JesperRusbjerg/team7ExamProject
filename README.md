@@ -1,12 +1,12 @@
 # ExamProject for System - Integration
 
 By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
-Video link: [TODO](**INSERT VIDEO LINK**)
-
+ 
+[Demo Video link](https://drive.google.com/file/d/1rOIWnKAVmmqhX3DwhxPGjHZBGk8JQ2KL/view?usp=sharing)
 
 ## Introduction
 
-Our team is part of the large IT company DevOrgs. Our task has been to develop a IT solution which enables a user to send a loan request. Our service intergrates with multiple banks and retrieves a response from each bank. Each bank response is presented to the user, with the option to pick the bank of the users choice.
+Our team is part of the large IT company DevOrgs. Our task has been to develop a IT solution which enables a user to send a loan request. Our service integrates with multiple banks and retrieves a response from each bank. Each bank response is presented to the user, with the option to pick the bank of the users choice.
 
 In addition to the bank application, an administrative site was also part of the project. The administrators of the application is able to see a range of logs, statistics and user operations from a separate admin site.
 
@@ -29,7 +29,7 @@ As a customer of our site, you are able to search for a bank loan, you must fill
 
 - CPR
 - Email address
-- Loan type(Quick, student, morgage)
+- Loan type(Quick, student, mortgage)
 - Amount
 - Currency
 
