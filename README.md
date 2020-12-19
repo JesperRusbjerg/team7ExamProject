@@ -53,15 +53,6 @@ Requirements: Must be logged in as administrator
 - ESB requests data from Logging module and returns it to statistics module
 - Statistics calculates and returns statistics to the webportal
 
-## Integration patterns
-- WRITE SOMETHING SMART HERE :) 
-
- EIP (Enterprist intergration patterens)
-  EM (Enterprise messaging)
-  ES (Event streaming)
-
- [TODO Read](https://datsoftlyngby.github.io/soft2020fall/resources/4fc67f30-SI2020ExamProject.pdf): 
- 
 ## Deployment
 
 Each microservice has been deployed into one single container using docker
@@ -73,8 +64,7 @@ As you may notice the Email module and the Credit score module is not to be foun
 
  ## Reflections
 
- Throughout the semester, there has been focus on high cohesion within microservices, low coupling, many integration strategies, technologies and patterns.  We did not think of different patterns before we decided on use cases in this project, therefor we ended up implementing much point-to-point messaging and used MOM/Message brokering in the bank part of the application, we had focus on implementing the different technologies (RPC, SOAP, REST) and focus on our architecture. In hindsight, we could have thought more about which patterns we would have wanted in the project and built some use cases for them, but overall we are very happy with how the project turned out. 
- 
+ Throughout the semester, there has been focus on high cohesion within microservices, low coupling, many integration strategies, technologies and patterns. We implemented point-to-point messaging and used MOM/Message brokering in the bank part of the application, we had focus on implementing the different technologies (RPC, SOAP, REST) and focus on our architecture. In hindsight, we could have thought more about which patterns we would have wanted in the project and built some use cases for them, but overall we are very happy with how the project turned out. 
 
 ## Microservices / Index
 
