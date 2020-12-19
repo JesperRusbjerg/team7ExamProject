@@ -1,33 +1,80 @@
 # ExamProject for System - Integration
 
 By Nikolai Perlt, Jesper Rusbjerg & Michael Due Pedersen
+Video link: [TODO](**INSERT VIDEO LINK**)
+
 
 ## Introduction
 
-Our team is part of the large IT company DevOrgs. Our task has been to develop a IT solution that enables a user to send a loan request. Our service intergrates with multiple banks and retrives a response from each bank. Each bank response is presented to the user, with the option to pick the bank of the users choice.
+Our team is part of the large IT company DevOrgs. Our task has been to develop a IT solution which enables a user to send a loan request. Our service intergrates with multiple banks and retrives a response from each bank. Each bank response is presented to the user, with the option to pick the bank of the users choice.
 
 In addition to the bank application, a administrative site was also part of the project. The administrators of the application is able to see a range of logs, statistics and user oprations from a seperate admin site.
 
-## Links and diagrams/models
-
-[Draft to exam project](https://datsoftlyngby.github.io/soft2020fall/resources/3ac43cba-ExamProjectDraft.pdf)
-
-[Brainstorm](https://github.com/JesperRusbjerg/team7ExamProject/blob/main/Brainstorm.md)
-
-[Exam project UML diagram](https://app.lucidchart.com/lucidchart/invitations/accept/0f1c9112-dbee-416f-b531-6fe8e2ef72d5)
+## System architecture
+Before we get into the flow of the program, we will take a look at the architecture of the system, a brief description of each module can be find in our "Microservices / Index" at the bottom of this text document.
 
 ![SI-ExamProject](SI-ExamProject.png)
 
-[BPMN Model file](https://github.com/JesperRusbjerg/team7ExamProject/blob/main/searchForLoan.bpmn)
+Looking at the architecture, it is very clear that he webserver is the orchestrator, it has to conteniously call the ESB untill a loan request or admin request has been forfilled. The ESB has the purpose of executing each request from the webserver and make sure the needed microservices are requested to complete the tasks. 
+
+The webserver calls the ESB using REST, which makes it very easy for a programmer to integrate with the ESB. As you can see on the picture, microservices and webservers are using diffrent integration techniques, which is integrated into the ESB, if the ESB was never implemented, the programmer creating the webserver would need to understand all of the mentioned technoligies in order to build the webserver.
+
+All of the webservers and microservices do not call any exteral sources, except for the CurrencyExchange microservice. This microservice webscrapes an external monolithic service, then it slices and converts the data in order in order for it to be used in our application.
+
+## Program flow
+
+### Customer
+
+As a customer of our site, you are able to search for a bank loan, you must fill in the following information:
+
+- CPR
+- Email address
+- Loan type(Quick, student, morgage)
+- Amount
+- Currency
+
+Once this information has been provided, the system can process your loan request. Below is shown an image of the flow, created using BPMN.
 
 ![BPMN Model](searchForLoan.png)
 
-## Program flow
- [TODO Read](https://datsoftlyngby.github.io/soft2020fall/resources/4fc67f30-SI2020ExamProject.pdf): 
-  EIP (Enterprist intergration patterens)
+### Administrator
+As an administrator of the site you must be logged in, the administrator enters login information, and then the following happens:
+- Request is sent to webserver
+- Webserver sends a request to ESB
+- ESB sends request to Login
+- A login token or error is returned based on the result of the login
+
+#### Retrieving statistics as administrator
+Requirements: Must be logged in as administrator
+- Request is sent to webserver
+- Webserver sends a request to ESB
+- If you are logged in, proceed to statistics module, otherwise request denied
+- Statistics module requests log data from ESB
+- ESB requests data from Logging module and returns it to statistics module
+- Statistics calculates and returns statistics to the webportal
+
+## Integration patterns
+- WRITE SOMETHING SMART HERE :) 
+
+ EIP (Enterprist intergration patterens)
   EM (Enterprise messaging)
   ES (Event streaming)
 
+ [TODO Read](https://datsoftlyngby.github.io/soft2020fall/resources/4fc67f30-SI2020ExamProject.pdf): 
+ 
+## Deployment
+
+Each microservice has been deployed into one single container using docker
+The docker compose file can be found here:
+
+[docker-compose-file](https://github.com/JesperRusbjerg/team7ExamProject/blob/main/docker/docker-compose.yml)
+
+As you may notice the Email module and the Credit score module is not to be found in this docker container as they are webservices, so they have been deployed on their own server.
+
+ ## Reflections
+
+ Throughout the semester, there has been focus on high cohesion within microservices, low coupling, many diffrent integration strategies, technoligies and patterns.  We did not think of diffrent patterns before we decided on use cases in this project, therefor we ended up implementing much point-to-point messaging and used MOM/Message brokering in the bank part of the application, we had focus on implementing the diffrent technoligies (RPC, SOAP, REST) and much focus on our architecture. In hinsight, we could have thought more about which patterns we would have wanted in the project and built some use cases for them, but overall we are very happy with how the project turned out. 
+ 
 
 ## Microservices / Index
 
@@ -151,3 +198,16 @@ In addition to the bank application, a administrative site was also part of the 
 - **[Deployment](https://team7-adminstrator.netlify.app/)**: Netlify
 - **Additional**: The backend needs to run on your localhost
 - **Description**: This is the administrator frontend. This allows the to get statistics on system behavior, latest logs, and user CRUD operations.
+
+## Links and diagrams/models
+
+[Draft to exam project](https://datsoftlyngby.github.io/soft2020fall/resources/3ac43cba-ExamProjectDraft.pdf)
+
+[Brainstorm](https://github.com/JesperRusbjerg/team7ExamProject/blob/main/Brainstorm.md)
+
+[Exam project UML diagram](https://app.lucidchart.com/lucidchart/invitations/accept/0f1c9112-dbee-416f-b531-6fe8e2ef72d5)
+
+
+
+[BPMN Model file](https://github.com/JesperRusbjerg/team7ExamProject/blob/main/searchForLoan.bpmn)
+
