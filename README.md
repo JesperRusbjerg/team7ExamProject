@@ -6,20 +6,20 @@ Video link: [TODO](**INSERT VIDEO LINK**)
 
 ## Introduction
 
-Our team is part of the large IT company DevOrgs. Our task has been to develop a IT solution which enables a user to send a loan request. Our service intergrates with multiple banks and retrives a response from each bank. Each bank response is presented to the user, with the option to pick the bank of the users choice.
+Our team is part of the large IT company DevOrgs. Our task has been to develop a IT solution which enables a user to send a loan request. Our service intergrates with multiple banks and retrieves a response from each bank. Each bank response is presented to the user, with the option to pick the bank of the users choice.
 
-In addition to the bank application, a administrative site was also part of the project. The administrators of the application is able to see a range of logs, statistics and user oprations from a seperate admin site.
+In addition to the bank application, an administrative site was also part of the project. The administrators of the application is able to see a range of logs, statistics and user operations from a separate admin site.
 
 ## System architecture
-Before we get into the flow of the program, we will take a look at the architecture of the system, a brief description of each module can be find in our "Microservices / Index" at the bottom of this text document.
+Before we get into the flow of the program, we will take a look at the architecture of the system, a brief description of each module can be found in our "Microservices / Index" at the bottom of this text document.
 
 ![SI-ExamProject](SI-ExamProject.png)
 
-Looking at the architecture, it is very clear that he webserver is the orchestrator, it has to conteniously call the ESB untill a loan request or admin request has been forfilled. The ESB has the purpose of executing each request from the webserver and make sure the needed microservices are requested to complete the tasks. 
+Looking at the architecture, it is very clear that the webserver is the orchestrator, it has to contentiously call the ESB until a loan request or admin request has been fulfilled. The ESB has the purpose of executing each request from the webserver and make sure the needed microservices are requested to complete the tasks. 
 
-The webserver calls the ESB using REST, which makes it very easy for a programmer to integrate with the ESB. As you can see on the picture, microservices and webservers are using diffrent integration techniques, which is integrated into the ESB, if the ESB was never implemented, the programmer creating the webserver would need to understand all of the mentioned technoligies in order to build the webserver.
+The webserver calls the ESB using REST, which makes it very easy for a programmer to integrate with the ESB. As you can see on the picture, microservices and webservers are using different integration techniques, which is integrated into the ESB, if the ESB was never implemented, the programmer creating the webserver would need to understand all the mentioned technologies in order to build the webserver.
 
-All of the webservers and microservices do not call any exteral sources, except for the CurrencyExchange microservice. This microservice webscrapes an external monolithic service, then it slices and converts the data in order in order for it to be used in our application.
+All the webservers and microservices do not call any external sources, except for the CurrencyExchange microservice. This microservice webscrapes an external monolithic service, then it slices and converts the data in order for it to be used in our application.
 
 ## Program flow
 
